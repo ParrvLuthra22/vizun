@@ -18,3 +18,33 @@ a {
   color: inherit;
   text-decoration: none;
 }
+
+/* Hero Section Responsive Styles */
+@media (max-width: 768px) {
+  .headline-hero {
+    font-size: clamp(3rem, 15vw, 6rem) !important;
+  }
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom scrollbar for webkit browsers */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-jet-black);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-gray-700);
+  border-radius: var(--radius-sm);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-gray-600);
+}
