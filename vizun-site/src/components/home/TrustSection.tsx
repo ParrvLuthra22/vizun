@@ -1,3 +1,5 @@
+import { Reveal } from '@/components/ui/Reveal';
+
 export const TrustSection = () => {
     const trustPoints = [
         {
@@ -25,20 +27,22 @@ export const TrustSection = () => {
                     gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
                     gap: 'var(--space-12)',
                 }}>
-                    {trustPoints.map((point) => (
-                        <div key={point.number} style={{ textAlign: 'center' }}>
-                            <p className="label-base text-luxury" style={{ marginBottom: 'var(--space-4)' }}>
-                                {point.number}
-                            </p>
+                    {trustPoints.map((point, index) => (
+                        <Reveal key={point.number} delay={index * 0.1} width="100%">
+                            <div style={{ textAlign: 'center' }}>
+                                <p className="label-base text-luxury" style={{ marginBottom: 'var(--space-4)' }}>
+                                    {point.number}
+                                </p>
 
-                            <h3 className="headline-4" style={{ marginBottom: 'var(--space-4)' }}>
-                                {point.title}
-                            </h3>
+                                <h3 className="headline-4" style={{ marginBottom: 'var(--space-4)' }}>
+                                    {point.title}
+                                </h3>
 
-                            <p className="body-base">
-                                {point.description}
-                            </p>
-                        </div>
+                                <p className="body-base">
+                                    {point.description}
+                                </p>
+                            </div>
+                        </Reveal>
                     ))}
                 </div>
             </div>

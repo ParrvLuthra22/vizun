@@ -1,4 +1,5 @@
 import { Button } from '@/components/ui/Button';
+import { Reveal, RevealText } from '@/components/ui/Reveal';
 
 export const PhilosophySection = () => {
     return (
@@ -6,35 +7,46 @@ export const PhilosophySection = () => {
             <div className="container-narrow" style={{
                 textAlign: 'center',
             }}>
-                <p className="label-lg text-luxury" style={{ marginBottom: 'var(--space-6)' }}>
-                    PHILOSOPHY
-                </p>
+                <Reveal width="100%">
+                    <p className="label-lg text-luxury" style={{ marginBottom: 'var(--space-6)' }}>
+                        PHILOSOPHY
+                    </p>
+                </Reveal>
 
-                <h2 className="headline-2" style={{ marginBottom: 'var(--space-8)' }}>
-                    Confidence Through Precision
-                </h2>
+                <div style={{ marginBottom: 'var(--space-8)', display: 'flex', justifyContent: 'center' }}>
+                    <RevealText
+                        text="Confidence Through Precision"
+                        className="headline-2"
+                    />
+                </div>
 
-                <p className="body-lg" style={{
-                    marginBottom: 'var(--space-6)',
-                    maxWidth: '800px',
-                    marginLeft: 'auto',
-                    marginRight: 'auto',
-                }}>
-                    We design for those who value quiet luxury over loud statements.
-                    Every piece is intentional, crafted with precision, and built to last.
-                </p>
+                <Reveal delay={0.2} width="100%">
+                    <p className="body-lg" style={{
+                        marginBottom: 'var(--space-6)',
+                        maxWidth: '800px',
+                        marginLeft: 'auto',
+                        marginRight: 'auto',
+                    }}>
+                        We design for those who value quiet luxury over loud statements.
+                        Every piece is intentional, crafted with precision, and built to last.
+                    </p>
+                </Reveal>
 
-                <p className="body-lg" style={{
-                    marginBottom: 'var(--space-10)',
-                    maxWidth: '800px',
-                    marginLeft: 'auto',
-                    marginRight: 'auto',
-                }}>
-                    VIZUN represents the intersection of modern streetwear and editorial fashion—
-                    confidence expressed through restraint, luxury through subtlety.
-                </p>
+                <Reveal delay={0.3} width="100%">
+                    <p className="body-lg" style={{
+                        marginBottom: 'var(--space-10)',
+                        maxWidth: '800px',
+                        marginLeft: 'auto',
+                        marginRight: 'auto',
+                    }}>
+                        VIZUN represents the intersection of modern streetwear and editorial fashion—
+                        confidence expressed through restraint, luxury through subtlety.
+                    </p>
+                </Reveal>
 
-                <Button variant="secondary">Learn Our Story</Button>
+                <Reveal delay={0.4} width="100%">
+                    <Button variant="secondary">Learn Our Story</Button>
+                </Reveal>
             </div>
         </section>
     );
