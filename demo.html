@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VIZUN Design System — Component Showcase</title>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Design System -->
+  <link rel="stylesheet" href="design-system.css">
+  
+  <style>
+    /* Demo-specific styles */
+    .demo-section {
+      margin-bottom: var(--space-24);
+    }
+    
+    .demo-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: var(--space-6);
+      margin-top: var(--space-8);
+    }
+    
+    .demo-color-swatch {
+      padding: var(--space-8);
+      border: var(--border-width-thin) solid var(--border-subtle);
+      text-align: center;
+    }
+    
+    .demo-color-box {
+      width: 100%;
+      height: 100px;
+      margin-bottom: var(--space-4);
+    }
+    
+    .component-showcase {
+      padding: var(--space-8);
+      background-color: var(--color-midnight-navy);
+      border: var(--border-width-thin) solid var(--border-subtle);
+      margin-top: var(--space-6);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Hero Section -->
+  <section class="section-hero">
+    <div class="container">
+      <p class="label-lg text-secondary" style="margin-bottom: var(--space-6);">DESIGN SYSTEM</p>
+      <h1 class="headline-hero">VIZUN</h1>
+      <p class="body-xl" style="margin-top: var(--space-6); margin-bottom: var(--space-8); max-width: 600px;">
+        A complete design system for premium men's fashion. Quiet luxury meets modern streetwear.
+      </p>
+      <button class="btn btn-primary btn-lg">Explore Components</button>
+    </div>
+  </section>
+
+  <!-- Color Palette Section -->
+  <section class="section section-primary">
+    <div class="container">
+      <div class="demo-section">
+        <p class="label-lg text-luxury">COLOR PALETTE</p>
+        <h2 class="headline-2" style="margin-top: var(--space-4); margin-bottom: var(--space-8);">
+          High Contrast, Dark Luxury
+        </h2>
+        
+        <div class="demo-grid">
+          <!-- Jet Black -->
+          <div class="demo-color-swatch">
+            <div class="demo-color-box" style="background-color: var(--color-jet-black);"></div>
+            <p class="label-base">JET BLACK</p>
+            <p class="body-sm">#0A0A0A</p>
+          </div>
+          
+          <!-- Midnight Navy -->
+          <div class="demo-color-swatch">
+            <div class="demo-color-box" style="background-color: var(--color-midnight-navy);"></div>
+            <p class="label-base">MIDNIGHT NAVY</p>
+            <p class="body-sm">#0F1419</p>
+          </div>
+          
+          <!-- Electric Blue -->
+          <div class="demo-color-swatch">
+            <div class="demo-color-box" style="background-color: var(--color-electric-blue);"></div>
+            <p class="label-base">ELECTRIC BLUE</p>
+            <p class="body-sm">#0066FF</p>
+          </div>
+          
+          <!-- Amber -->
+          <div class="demo-color-swatch">
+            <div class="demo-color-box" style="background-color: var(--color-amber);"></div>
+            <p class="label-base">AMBER</p>
+            <p class="body-sm">#D4A574</p>
+          </div>
+          
+          <!-- Off-White -->
+          <div class="demo-color-swatch">
+            <div class="demo-color-box" style="background-color: var(--color-off-white);"></div>
+            <p class="label-base" style="color: var(--color-jet-black);">OFF-WHITE</p>
+            <p class="body-sm" style="color: var(--color-jet-black);">#F5F5F0</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Typography Section -->
+  <section class="section section-secondary">
+    <div class="container">
+      <div class="demo-section">
+        <p class="label-lg text-luxury">TYPOGRAPHY</p>
+        <h2 class="headline-2" style="margin-top: var(--space-4); margin-bottom: var(--space-8);">
+          Editorial Elegance
+        </h2>
+        
+        <!-- Headlines -->
+        <div style="margin-bottom: var(--space-12);">
+          <p class="label-base" style="margin-bottom: var(--space-6);">HEADLINES — PLAYFAIR DISPLAY</p>
+          <h1 class="headline-1" style="margin-bottom: var(--space-4);">Headline 1 — Bold Impact</h1>
+          <h2 class="headline-2" style="margin-bottom: var(--space-4);">Headline 2 — Section Titles</h2>
+          <h3 class="headline-3" style="margin-bottom: var(--space-4);">Headline 3 — Subsections</h3>
+          <h4 class="headline-4">Headline 4 — Card Titles</h4>
+        </div>
+        
+        <!-- Body Text -->
+        <div style="margin-bottom: var(--space-12);">
+          <p class="label-base" style="margin-bottom: var(--space-6);">BODY TEXT — INTER</p>
+          <p class="body-xl" style="margin-bottom: var(--space-4);">
+            Body XL — Lead paragraphs and featured content. Perfect for introductions that need to make an impact while maintaining readability.
+          </p>
+          <p class="body-lg" style="margin-bottom: var(--space-4);">
+            Body Large — Feature descriptions and important secondary content. Ideal for product details and editorial content.
+          </p>
+          <p class="body-base" style="margin-bottom: var(--space-4);">
+            Body Base — Standard body text for general content. The workhorse of the typography system, optimized for extended reading.
+          </p>
+          <p class="body-sm">
+            Body Small — Captions, metadata, and supporting information. Use for dates, categories, and supplementary details.
+          </p>
+        </div>
+        
+        <!-- Labels -->
+        <div>
+          <p class="label-base" style="margin-bottom: var(--space-6);">UI LABELS</p>
+          <p class="label-lg" style="margin-bottom: var(--space-3);">LABEL LARGE — NAVIGATION</p>
+          <p class="label-base">LABEL BASE — FORM LABELS</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Buttons Section -->
+  <section class="section section-primary">
+    <div class="container">
+      <div class="demo-section">
+        <p class="label-lg text-luxury">BUTTONS</p>
+        <h2 class="headline-2" style="margin-top: var(--space-4); margin-bottom: var(--space-8);">
+          One Primary CTA Per Section
+        </h2>
+        
+        <div class="component-showcase">
+          <p class="label-base" style="margin-bottom: var(--space-6);">PRIMARY BUTTON</p>
+          <div style="display: flex; gap: var(--space-4); flex-wrap: wrap; margin-bottom: var(--space-8);">
+            <button class="btn btn-primary btn-sm">Small Primary</button>
+            <button class="btn btn-primary">Default Primary</button>
+            <button class="btn btn-primary btn-lg">Large Primary</button>
+          </div>
+          
+          <p class="label-base" style="margin-bottom: var(--space-6);">SECONDARY BUTTON</p>
+          <div style="display: flex; gap: var(--space-4); flex-wrap: wrap; margin-bottom: var(--space-8);">
+            <button class="btn btn-secondary btn-sm">Small Secondary</button>
+            <button class="btn btn-secondary">Default Secondary</button>
+            <button class="btn btn-secondary btn-lg">Large Secondary</button>
+          </div>
+          
+          <p class="label-base" style="margin-bottom: var(--space-6);">ACCENT BUTTON</p>
+          <div style="display: flex; gap: var(--space-4); flex-wrap: wrap; margin-bottom: var(--space-8);">
+            <button class="btn btn-accent btn-sm">Small Accent</button>
+            <button class="btn btn-accent">Default Accent</button>
+            <button class="btn btn-accent btn-lg">Large Accent</button>
+          </div>
+          
+          <p class="label-base" style="margin-bottom: var(--space-6);">GHOST BUTTON</p>
+          <div style="display: flex; gap: var(--space-4); flex-wrap: wrap;">
+            <button class="btn btn-ghost btn-sm">Small Ghost</button>
+            <button class="btn btn-ghost">Default Ghost</button>
+            <button class="btn btn-ghost btn-lg">Large Ghost</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Cards Section -->
+  <section class="section section-secondary">
+    <div class="container">
+      <div class="demo-section">
+        <p class="label-lg text-luxury">CARDS</p>
+        <h2 class="headline-2" style="margin-top: var(--space-4); margin-bottom: var(--space-8);">
+          Minimal Components
+        </h2>
+        
+        <div class="demo-grid">
+          <!-- Standard Card -->
+          <div class="card">
+            <p class="label-base" style="margin-bottom: var(--space-4);">STANDARD CARD</p>
+            <h3 class="headline-4" style="margin-bottom: var(--space-4);">Premium Essentials</h3>
+            <p class="body-base" style="margin-bottom: var(--space-6);">
+              Timeless pieces designed for the modern wardrobe. Crafted with precision and attention to detail.
+            </p>
+            <button class="btn btn-ghost">Explore →</button>
+          </div>
+          
+          <!-- Standard Card -->
+          <div class="card">
+            <p class="label-base" style="margin-bottom: var(--space-4);">STANDARD CARD</p>
+            <h3 class="headline-4" style="margin-bottom: var(--space-4);">Editorial Collection</h3>
+            <p class="body-base" style="margin-bottom: var(--space-6);">
+              Curated selections that blend modern streetwear with editorial sophistication.
+            </p>
+            <button class="btn btn-ghost">View Collection →</button>
+          </div>
+        </div>
+        
+        <div style="margin-top: var(--space-12);">
+          <p class="label-base" style="margin-bottom: var(--space-6);">MINIMAL CARDS</p>
+          
+          <div class="card-minimal">
+            <h4 class="headline-4" style="margin-bottom: var(--space-3);">Quiet Confidence</h4>
+            <p class="body-sm">Spring/Summer 2026</p>
+          </div>
+          
+          <div class="card-minimal">
+            <h4 class="headline-4" style="margin-bottom: var(--space-3);">Modern Essentials</h4>
+            <p class="body-sm">Core Collection</p>
+          </div>
+          
+          <div class="card-minimal">
+            <h4 class="headline-4" style="margin-bottom: var(--space-3);">Editorial Series</h4>
+            <p class="body-sm">Limited Edition</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Navigation Section -->
+  <section class="section section-primary">
+    <div class="container">
+      <div class="demo-section">
+        <p class="label-lg text-luxury">NAVIGATION</p>
+        <h2 class="headline-2" style="margin-top: var(--space-4); margin-bottom: var(--space-8);">
+          Subtle Interactions
+        </h2>
+        
+        <div class="component-showcase">
+          <nav class="nav">
+            <a href="#" class="nav-link">Collections</a>
+            <a href="#" class="nav-link nav-link-active">Editorial</a>
+            <a href="#" class="nav-link">About</a>
+            <a href="#" class="nav-link">Journal</a>
+            <a href="#" class="nav-link">Contact</a>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Forms Section -->
+  <section class="section section-secondary">
+    <div class="container-narrow">
+      <div class="demo-section">
+        <p class="label-lg text-luxury">FORMS</p>
+        <h2 class="headline-2" style="margin-top: var(--space-4); margin-bottom: var(--space-8);">
+          Clean Inputs
+        </h2>
+        
+        <div class="component-showcase">
+          <div style="margin-bottom: var(--space-6);">
+            <label class="label-base" style="display: block; margin-bottom: var(--space-3);">EMAIL ADDRESS</label>
+            <input type="email" class="input" placeholder="your@email.com">
+          </div>
+          
+          <div style="margin-bottom: var(--space-6);">
+            <label class="label-base" style="display: block; margin-bottom: var(--space-3);">FULL NAME</label>
+            <input type="text" class="input" placeholder="Enter your name">
+          </div>
+          
+          <button class="btn btn-primary" style="width: 100%;">Submit</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Dividers Section -->
+  <section class="section section-primary">
+    <div class="container">
+      <div class="demo-section">
+        <p class="label-lg text-luxury">DIVIDERS</p>
+        <h2 class="headline-2" style="margin-top: var(--space-4); margin-bottom: var(--space-8);">
+          Subtle Separators
+        </h2>
+        
+        <p class="body-base">Content above divider</p>
+        <hr class="divider">
+        <p class="body-base">Content below divider</p>
+        <hr class="divider divider-strong">
+        <p class="body-base">Content below strong divider</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Layout Examples -->
+  <section class="section section-secondary">
+    <div class="container">
+      <div class="demo-section">
+        <p class="label-lg text-luxury">LAYOUT EXAMPLES</p>
+        <h2 class="headline-2" style="margin-top: var(--space-4); margin-bottom: var(--space-8);">
+          Generous Negative Space
+        </h2>
+        
+        <!-- Two Column Layout -->
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-12); margin-bottom: var(--space-16);">
+          <div>
+            <h3 class="headline-3" style="margin-bottom: var(--space-6);">Philosophy</h3>
+            <p class="body-lg">
+              VIZUN represents the intersection of quiet luxury and modern streetwear. Every piece is designed with intention, crafted with precision.
+            </p>
+          </div>
+          <div>
+            <h3 class="headline-3" style="margin-bottom: var(--space-6);">Craftsmanship</h3>
+            <p class="body-lg">
+              We believe in timeless design over fleeting trends. Each collection embodies confidence through restraint, luxury through subtlety.
+            </p>
+          </div>
+        </div>
+        
+        <!-- Feature Grid -->
+        <div class="demo-grid">
+          <div>
+            <p class="label-base text-luxury" style="margin-bottom: var(--space-4);">01</p>
+            <h4 class="headline-4" style="margin-bottom: var(--space-3);">Minimal</h4>
+            <p class="body-base">Remove before you add. Every element serves a purpose.</p>
+          </div>
+          <div>
+            <p class="label-base text-luxury" style="margin-bottom: var(--space-4);">02</p>
+            <h4 class="headline-4" style="margin-bottom: var(--space-3);">Bold</h4>
+            <p class="body-base">Make intentional choices. Confidence over consensus.</p>
+          </div>
+          <div>
+            <p class="label-base text-luxury" style="margin-bottom: var(--space-4);">03</p>
+            <h4 class="headline-4" style="margin-bottom: var(--space-3);">Cinematic</h4>
+            <p class="body-base">Think editorial, not e-commerce. Every pixel feels expensive.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA Section -->
+  <section class="section section-primary">
+    <div class="container text-center">
+      <p class="label-lg text-luxury" style="margin-bottom: var(--space-6);">READY TO BUILD</p>
+      <h2 class="headline-2" style="margin-bottom: var(--space-8);">
+        Start Creating with VIZUN
+      </h2>
+      <p class="body-xl" style="margin-bottom: var(--space-10); max-width: 700px; margin-left: auto; margin-right: auto;">
+        Use this design system to build premium experiences that embody quiet luxury and modern sophistication.
+      </p>
+      <div style="display: flex; gap: var(--space-4); justify-content: center; flex-wrap: wrap;">
+        <button class="btn btn-primary btn-lg">Download System</button>
+        <button class="btn btn-secondary btn-lg">View Documentation</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="section section-secondary border-top">
+    <div class="container">
+      <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: var(--space-6);">
+        <div>
+          <h3 class="headline-4" style="margin-bottom: var(--space-3);">VIZUN</h3>
+          <p class="body-sm">Quiet luxury for the modern man</p>
+        </div>
+        <nav class="nav">
+          <a href="#" class="nav-link">Collections</a>
+          <a href="#" class="nav-link">Editorial</a>
+          <a href="#" class="nav-link">About</a>
+          <a href="#" class="nav-link">Contact</a>
+        </nav>
+      </div>
+      <hr class="divider">
+      <p class="body-xs text-center">© 2026 VIZUN. All rights reserved.</p>
+    </div>
+  </footer>
+
+</body>
+</html>
