@@ -2,61 +2,61 @@
 
 import { Button } from '@/components/ui/Button';
 import { motion } from 'framer-motion';
-import { slamUp, durations, easings } from '@/lib/motion';
+import { slamUp, fadeSlideUp, durations, easings } from '@/lib/motion';
 import { Parallax } from '@/components/ui/Parallax';
 
 export const PhilosophySection = () => {
     return (
-        <section className="py-32 bg-[var(--color-jet-black)] text-[var(--color-off-white)] relative overflow-hidden">
+        <section className="py-32 bg-[var(--color-jet-black)] text-[var(--color-off-white)] relative overflow-hidden w-full">
             {/* Asymmetrical Layout */}
-            <div className="container relative z-10 flex flex-col md:flex-row gap-16 md:gap-32">
+            <div className="container relative z-10 flex flex-col md:flex-row h-full">
 
                 {/* Huge Watermark / Title - Moves slower (Lag) */}
-                <div className="md:w-1/2">
-                    <Parallax speed={-0.2} lag>
-                        <motion.h2
-                            variants={slamUp}
-                            initial="hidden"
-                            whileInView="visible"
-                            viewport={{ once: true, margin: "-10%" }}
-                            className="text-[15vw] leading-[0.8] font-bold tracking-tighter text-[var(--color-gray-900)] uppercase font-serif"
-                            style={{ wordBreak: 'break-all' }}
-                        >
-                            PHILO <br /> SOPHY
-                        </motion.h2>
+                <div className="md:w-1/2 flex flex-col justify-center relative mix-blend-difference z-0">
+                    <Parallax speed={-0.2}>
+                        <div className="flex flex-col leading-[0.8] tracking-tighter font-bold font-serif text-[var(--color-jet-black)] opacity-100 select-none">
+                            <motion.span
+                                initial={{ x: -100, opacity: 0 }}
+                                whileInView={{ x: 0, opacity: 1 }}
+                                transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+                                className="text-[25vw] md:text-[30vw] ml-[-5vw]"
+                            >
+                                PHILO
+                            </motion.span>
+                            <motion.span
+                                initial={{ x: 100, opacity: 0 }}
+                                whileInView={{ x: 0, opacity: 1 }}
+                                transition={{ duration: 1, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+                                className="text-[25vw] md:text-[30vw] self-end mr-[-5vw]"
+                            >
+                                SOPHY
+                            </motion.span>
+                        </div>
                     </Parallax>
                 </div>
 
-                <div className="md:w-1/2 flex flex-col justify-center">
-                    <Parallax speed={0.1}>
-                        <motion.h3
-                            variants={slamUp}
-                            initial="hidden"
-                            whileInView="visible"
-                            viewport={{ once: true }}
-                            className="text-4xl md:text-6xl font-bold uppercase tracking-tighter mb-8 text-[var(--color-off-white)]"
-                        >
-                            CONFIDENCE <span className="text-[var(--color-electric-blue)]">IS</span> <br />
-                            PRECISION.
-                        </motion.h3>
-
-                        <motion.div
-                            initial={{ opacity: 0, x: 50 }}
-                            whileInView={{ opacity: 1, x: 0 }}
-                            transition={{ duration: durations.medium, delay: 0.2, ease: easings.aggressive }}
-                            viewport={{ once: true }}
-                            className="border-l-4 border-[var(--color-electric-blue)] pl-8"
-                        >
-                            <p className="text-xl md:text-2xl font-bold leading-tight mb-8 max-w-md text-[var(--color-gray-400)] uppercase">
-                                We don't do "quiet". We do deliberate. <br />
-                                Every stitch is a decision. <br />
-                                Every cut is a declaration.
-                            </p>
-                            <div className="flex gap-4">
-                                <Button variant="secondary">THE MANIFESTO</Button>
-                            </div>
-                        </motion.div>
-                    </Parallax>
+                <div className="md:w-1/2 flex flex-col justify-center md:pl-24 z-10">
+                    <motion.div
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={{ once: true, margin: "-10%" }}
+                        variants={fadeSlideUp}
+                        className="bg-[var(--color-off-white)] p-8 md:p-12 shadow-2xl skew-y-2 md:-skew-y-2 border-l-4 border-[var(--color-alert-red)]"
+                    >
+                        <h3 className="text-sm font-bold tracking-widest uppercase mb-6 text-[var(--color-alert-red)]">
+                            The Manifesto
+                        </h3>
+                        <p className="text-2xl md:text-4xl font-bold leading-tight uppercase tracking-tight text-[var(--color-jet-black)] mb-8">
+                            "We do not design for comfort. <br /> We design for <span className="text-[var(--color-alert-red)]">impact</span>."
+                        </p>
+                        <p className="text-lg md:text-xl text-[var(--color-gray-600)] leading-relaxed font-medium">
+                            VIZUN is an exploration of raw aesthetics and industrial precision.
+                            We reject the seamless and embrace the friction of reality.
+                        </p>
+                        <div className="mt-8">
+                            <Button variant="primary">READ MORE</Button>
+                        </div>
+                    </motion.div>
                 </div>
             </div>
 

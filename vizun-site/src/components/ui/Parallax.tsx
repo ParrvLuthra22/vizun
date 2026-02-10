@@ -24,23 +24,25 @@ export const Parallax = ({
         offset: ["start end", "end start"]
     });
 
-    // Direct Transform (Standard Parallax)
-    const yTransform = useTransform(scrollYProgress, [0, 1], ["0%", `${speed * 100}%`]);
-    const xTransform = useTransform(scrollYProgress, [0, 1], ["0%", `${speed * 100}%`]);
+    // Clamp values to prevent elements from flying off too far
+    // Limit to -50% to 50% relative movement
+    const clampedY = useTransform(scrollYProgress, [0, 1], ["0%", `${Math.max(-50, Math.min(50, speed * 100))}%`]);
+    const clampedX = useTransform(scrollYProgress, [0, 1], ["0%", `${Math.max(-50, Math.min(50, speed * 100))}%`]);
 
     // Physics Transform (Laggy/Heavy feel)
-    const smoothY = useSpring(yTransform, { damping: 15, stiffness: 100 });
-    const smoothX = useSpring(xTransform, { damping: 15, stiffness: 100 });
+    const smoothY = useSpring(clampedY, { damping: 15, stiffness: 100 });
+    const smoothX = useSpring(clampedX, { damping: 15, stiffness: 100 });
 
-    const finalY = lag ? smoothY : yTransform;
-    const finalX = lag ? smoothX : xTransform;
+    const finalY = lag ? smoothY : clampedY;
+    const finalX = lag ? smoothX : clampedX;
 
     return (
         <div ref={ref} className={className}>
             <motion.div
                 style={{
                     y: direction === 'vertical' ? finalY : 0,
-                    x: direction === 'horizontal' ? finalX : 0
+                    x: direction === 'horizontal' ? finalX : 0,
+                    willChange: 'transform' // GPU Hint
                 }}
             >
                 {children}

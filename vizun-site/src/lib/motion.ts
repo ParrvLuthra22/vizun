@@ -240,7 +240,7 @@ export const staggerContainer = (speed: keyof typeof staggerConfig = 'medium') =
 // Hover Animations
 export const hoverLift = {
   scale: 1.02,
-  y: -4,
+  y: -2,
   transition: {
     duration: durations.medium,
     ease: easings.luxury,

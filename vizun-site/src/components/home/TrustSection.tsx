@@ -9,7 +9,7 @@ export const TrustSection = () => {
             {/* Brutalist Marquees */}
             <div className="flex flex-col gap-0">
                 {/* Line 1 - Right to Left */}
-                <Parallax speed={-0.05} className="w-full">
+                <Parallax speed={-0.02} className="w-full">
                     <div className="whitespace-nowrap flex gap-12 items-center opacity-80">
                         {Array.from({ length: 4 }).map((_, i) => (
                             <span key={i} className="text-[12vw] font-bold font-serif leading-none tracking-tighter hover:text-[var(--color-alert-red)] transition-colors duration-200">
@@ -20,7 +20,7 @@ export const TrustSection = () => {
                 </Parallax>
 
                 {/* Line 2 - Left to Right */}
-                <Parallax speed={0.05} className="w-full">
+                <Parallax speed={0.02} className="w-full">
                     <div className="whitespace-nowrap flex gap-12 items-center text-[var(--color-gray-500)] ml-[-20vw]">
                         {Array.from({ length: 4 }).map((_, i) => (
                             <span key={i} className="text-[12vw] font-bold font-serif leading-none tracking-tighter hover:text-[var(--color-off-white)] transition-colors duration-200">

@@ -69,12 +69,12 @@ export const EditorialCard: React.FC<EditorialCardProps> = ({
             >
                 {/* Image Container - Aggressive Scale */}
                 <div className={`relative w-full overflow-hidden bg-[var(--color-jet-black)] mb-6 ${aspectRatio === 'portrait' ? 'aspect-[3/4]' :
-                        aspectRatio === 'square' ? 'aspect-square' : 'aspect-[4/3]'
+                    aspectRatio === 'square' ? 'aspect-square' : 'aspect-[4/3]'
                     }`}>
                     <motion.div
                         className="w-full h-full relative"
-                        whileHover={{ scale: 1.15 }} // Aggressive zoom
-                        transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+                        whileHover={{ scale: 1.10 }} // Controlled aggression
+                        transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
                     >
                         <Image
                             src={image}

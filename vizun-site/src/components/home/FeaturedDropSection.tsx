@@ -83,7 +83,7 @@ export const FeaturedDropSection = () => {
                 </div>
 
                 {/* Editorial "Scattered" Layout - Overlapping & Asymmetrical */}
-                <div className="relative h-[180vh] md:h-[150vh] w-full">
+                <div className="relative h-[180dvh] md:h-[150dvh] w-full">
 
                     {/* Item 1 - Hero Product (Left, Large) */}
                     <div className="absolute top-0 left-0 w-full md:w-[55%] z-10">

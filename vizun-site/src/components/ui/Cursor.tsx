@@ -8,7 +8,7 @@ export const Cursor = () => {
     const cursorX = useMotionValue(-100);
     const cursorY = useMotionValue(-100);
 
-    const springConfig = { damping: 25, stiffness: 700 };
+    const springConfig = { damping: 30, stiffness: 400 }; // Lazier, smoother feel
     const cursorXSpring = useSpring(cursorX, springConfig);
     const cursorYSpring = useSpring(cursorY, springConfig);
 
@@ -48,6 +48,7 @@ export const Cursor = () => {
             style={{
                 x: cursorXSpring,
                 y: cursorYSpring,
+                willChange: "transform"
             }}
         >
             {/* Crosshair / Precision Sight */}

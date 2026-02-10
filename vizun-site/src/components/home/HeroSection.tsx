@@ -15,7 +15,7 @@ export const HeroSection = () => {
 
     // Parallax - Image moves faster than text
     const imageY = useTransform(scrollYProgress, [0, 1], ['0%', '30%']);
-    const textY = useTransform(scrollYProgress, [0, 1], ['0%', '100%']); // Text moves away fast
+    const textY = useTransform(scrollYProgress, [0, 1], ['0%', '60%']); // Text moves away slower (clamping)
 
     return (
         <section
@@ -28,7 +28,7 @@ export const HeroSection = () => {
                 variants={tiltEnter}
                 initial="hidden"
                 animate="visible"
-                style={{ y: imageY }}
+                style={{ y: imageY, willChange: "transform" }}
             >
                 <div className="relative w-full h-full">
                     <Image
@@ -51,10 +51,10 @@ export const HeroSection = () => {
                     initial="hidden"
                     animate="visible"
                     variants={impactVar}
-                    className="absolute top-[8%] left-[-2vw] mix-blend-exclusion"
-                    style={{ y: textY }}
+                    className="absolute top-[5%] left-[-2%]"
+                    style={{ y: textY, willChange: 'transform' }}
                 >
-                    <h1 className="headline-giant-1 text-[var(--color-off-white)] opacity-80 leading-[0.7]">
+                    <h1 className="text-[18vw] font-bold font-serif leading-[0.75] tracking-tighter text-[var(--color-off-white)] opacity-80 mix-blend-exclusion select-none">
                         VIZUN
                     </h1>
                 </motion.div>
@@ -64,9 +64,10 @@ export const HeroSection = () => {
                     initial="hidden"
                     animate="visible"
                     variants={impactVar} // Same fast entry
-                    className="absolute bottom-[15%] right-[-5vw] text-right z-20"
+                    className="absolute bottom-[10%] right-[-2%] z-20 text-right"
+                    style={{ willChange: 'transform' }}
                 >
-                    <h1 className="headline-giant-1 text-[var(--color-electric-blue)] leading-[0.7] mix-blend-difference">
+                    <h1 className="text-[18vw] font-bold font-serif leading-[0.75] tracking-tighter text-[var(--color-electric-blue)] mix-blend-difference select-none">
                         ARMORED
                     </h1>
                 </motion.div>
@@ -93,9 +94,9 @@ export const HeroSection = () => {
 
             {/* Kinetic Scroll Indicator - Vertical Line */}
             <motion.div
-                className="absolute bottom-0 left-[5%] z-20 h-[15vh] w-[1px] bg-[var(--color-off-white)] overflow-hidden"
-                initial={{ height: 0 }}
-                animate={{ height: '15vh' }}
+                className="absolute bottom-0 left-[5%] z-20 h-[15vh] w-[1px] bg-[var(--color-off-white)] overflow-hidden origin-bottom"
+                initial={{ scaleY: 0 }}
+                animate={{ scaleY: 1 }}
                 transition={{ duration: 1, delay: 0.5, ease: easings.luxury }}
             >
                 <motion.div

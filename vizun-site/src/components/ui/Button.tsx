@@ -2,7 +2,7 @@
 
 import { ButtonHTMLAttributes, forwardRef, useState } from 'react';
 import { motion, HTMLMotionProps } from 'framer-motion';
-import { durations, easings } from '@/lib/motion';
+import { durations, easings, hoverLift } from '@/lib/motion';
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
     variant?: 'primary' | 'secondary' | 'accent' | 'ghost';
@@ -36,6 +36,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
                 onMouseEnter={() => setIsHovered(true)}
                 onMouseLeave={() => setIsHovered(false)}
                 className={`${baseStyles} ${variants[variant]} ${sizes[size]} ${className}`}
+                whileHover={variant !== 'ghost' ? hoverLift : {}}
                 whileTap={{ scale: 0.98 }}
                 {...(props as HTMLMotionProps<'button'>)}
             >
@@ -46,8 +47,8 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
 
                 {/* Content Layer - Color Swap */}
                 <span className={`relative z-10 transition-colors duration-300 ${variant === 'primary' ? 'group-hover:text-[var(--color-jet-black)]' :
-                        variant === 'secondary' ? 'group-hover:text-[var(--color-off-white)]' :
-                            variant === 'accent' ? 'group-hover:text-[var(--color-electric-blue)]' : ''
+                    variant === 'secondary' ? 'group-hover:text-[var(--color-off-white)]' :
+                        variant === 'accent' ? 'group-hover:text-[var(--color-electric-blue)]' : ''
                     }`}>
                     {props.children}
                 </span>

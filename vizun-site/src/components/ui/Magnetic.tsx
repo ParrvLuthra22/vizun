@@ -1,11 +1,15 @@
 'use client';
 
-import { useRef, useState } from 'react';
-import { motion } from 'framer-motion';
+import { useRef } from 'react';
+import { motion, useMotionValue, useSpring } from 'framer-motion';
 
 export const Magnetic = ({ children }: { children: React.ReactNode }) => {
     const ref = useRef<HTMLDivElement>(null);
-    const [position, setPosition] = useState({ x: 0, y: 0 });
+    const x = useMotionValue(0);
+    const y = useMotionValue(0);
+
+    const smoothX = useSpring(x, { stiffness: 150, damping: 15, mass: 0.1 });
+    const smoothY = useSpring(y, { stiffness: 150, damping: 15, mass: 0.1 });
 
     const handleMouseMove = (e: React.MouseEvent) => {
         const { clientX, clientY } = e;
@@ -13,23 +17,26 @@ export const Magnetic = ({ children }: { children: React.ReactNode }) => {
         const middleX = clientX - (left + width / 2);
         const middleY = clientY - (top + height / 2);
 
-        setPosition({ x: middleX * 0.2, y: middleY * 0.2 });
+        // Clamp values to max 15px to prevent flying off
+        const maxDist = 15;
+        const clampedX = Math.max(-maxDist, Math.min(maxDist, middleX * 0.2));
+        const clampedY = Math.max(-maxDist, Math.min(maxDist, middleY * 0.2));
+
+        x.set(clampedX);
+        y.set(clampedY);
     };
 
     const reset = () => {
-        setPosition({ x: 0, y: 0 });
+        x.set(0);
+        y.set(0);
     };
-
-    const { x, y } = position;
 
     return (
         <motion.div
-            style={{ position: 'relative' }}
+            style={{ position: 'relative', x: smoothX, y: smoothY }}
             ref={ref}
             onMouseMove={handleMouseMove}
             onMouseLeave={reset}
-            animate={{ x, y }}
-            transition={{ type: "spring", stiffness: 150, damping: 15, mass: 0.1 }}
         >
             {children}
         </motion.div>
