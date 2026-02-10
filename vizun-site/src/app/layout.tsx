@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Oswald, Inter } from "next/font/google";
 import "./globals.css";
 import { SmoothScroll } from "@/components/ui/SmoothScroll";
+import { Cursor } from "@/components/ui/Cursor";
 
 const oswald = Oswald({
   variable: "--font-oswald",

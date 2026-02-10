@@ -1,53 +1,46 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { slamUp, staggerContainer } from '@/lib/motion';
+import { Parallax } from '@/components/ui/Parallax';
 
 export const TrustSection = () => {
-    const trustPoints = [
-        {
-            number: '01',
-            title: 'MATERIALS',
-            description: 'Sourced from the finest mills in Italy and Japan',
-        },
-        {
-            number: '02',
-            title: 'LIMITED',
-            description: 'Each drop is strictly limited to 100 pieces',
-        },
-        {
-            number: '03',
-            title: 'VELOCITY',
-            description: 'Global express shipping included',
-        },
-    ];
-
     return (
-        <section className="py-24 bg-[var(--color-jet-black)] text-[var(--color-off-white)] border-t border-[var(--color-gray-800)]">
-            <div className="container">
-                <motion.div
-                    variants={staggerContainer('fast')}
-                    initial="hidden"
-                    whileInView="visible"
-                    viewport={{ once: true, margin: "-10%" }}
-                    className="grid grid-cols-1 md:grid-cols-3 gap-12 text-center md:text-left"
-                >
-                    {trustPoints.map((point) => (
-                        <motion.div key={point.number} variants={slamUp} className="group cursor-default">
-                            <p className="text-8xl font-bold font-serif text-[var(--color-gray-800)] group-hover:text-[var(--color-electric-blue)] transition-colors duration-300 mb-[-10px] leading-none">
-                                {point.number}
-                            </p>
+        <section className="py-12 bg-[var(--color-jet-black)] text-[var(--color-off-white)] overflow-hidden">
+            {/* Brutalist Marquees */}
+            <div className="flex flex-col gap-0">
+                {/* Line 1 - Right to Left */}
+                <Parallax speed={-0.05} className="w-full">
+                    <div className="whitespace-nowrap flex gap-12 items-center opacity-80">
+                        {Array.from({ length: 4 }).map((_, i) => (
+                            <span key={i} className="text-[12vw] font-bold font-serif leading-none tracking-tighter hover:text-[var(--color-alert-red)] transition-colors duration-200">
+                                ITALIAN MILLS / JAPANESE DENIM /
+                            </span>
+                        ))}
+                    </div>
+                </Parallax>
 
-                            <h3 className="text-3xl font-bold uppercase tracking-tighter mb-4 text-[var(--color-off-white)]">
-                                {point.title}
-                            </h3>
+                {/* Line 2 - Left to Right */}
+                <Parallax speed={0.05} className="w-full">
+                    <div className="whitespace-nowrap flex gap-12 items-center text-[var(--color-gray-500)] ml-[-20vw]">
+                        {Array.from({ length: 4 }).map((_, i) => (
+                            <span key={i} className="text-[12vw] font-bold font-serif leading-none tracking-tighter hover:text-[var(--color-off-white)] transition-colors duration-200">
+                                LIMITED EDITION / NO RESTOCKS /
+                            </span>
+                        ))}
+                    </div>
+                </Parallax>
+            </div>
 
-                            <p className="text-[var(--color-gray-500)] text-lg leading-tight uppercase font-bold tracking-wide">
-                                {point.description}
-                            </p>
-                        </motion.div>
-                    ))}
-                </motion.div>
+            {/* Divider */}
+            <div className="w-full h-[1px] bg-[var(--color-gray-800)] mt-12 mb-12" />
+
+            <div className="container flex justify-between items-end">
+                <span className="text-sm font-mono uppercase tracking-widest text-[var(--color-gray-500)]">
+                    EST. 2026 / NYC
+                </span>
+                <span className="text-sm font-mono uppercase tracking-widest text-[var(--color-alert-red)]">
+                    ● WORLDWIDE SHIPPING
+                </span>
             </div>
         </section>
     );

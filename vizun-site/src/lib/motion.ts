@@ -11,11 +11,11 @@
 
 // Luxury Easing Functions
 export const easings = {
-  // Primary luxury easing - smooth and sophisticated
+  // Primary luxury easing - faster start/stop
   luxury: [0.16, 1, 0.3, 1] as [number, number, number, number],
 
-  // Aggressive / Kinetic - Fast acceleration, sharp snap
-  aggressive: [0.6, 0.05, 0.01, 0.9] as [number, number, number, number],
+  // Aggressive / Kinetic - Much steeper snap
+  aggressive: [0.7, 0, 0, 1] as [number, number, number, number],
 
   // Impact - Instant hit
   impact: [0.22, 1, 0.36, 1] as [number, number, number, number],
@@ -33,13 +33,13 @@ export const easings = {
   scale: [0.33, 1, 0.68, 1] as [number, number, number, number],
 } as const;
 
-// Standard Animation Durations
+// Standard Animation Durations - FASTER
 export const durations = {
-  instant: 0.1,    // Micro-interactions (faster)
-  fast: 0.25,       // Button hovers
-  medium: 0.4,     // Standard transitions
-  slow: 0.6,       // Reveals and entries
-  cinematic: 0.8,  // Hero elements (faster)
+  instant: 0.05,   // Micro-interactions (lightning fast)
+  fast: 0.15,      // Button hovers
+  medium: 0.3,     // Standard transitions
+  slow: 0.5,       // Reveals and entries (was 0.6/0.8)
+  cinematic: 0.7,  // Hero elements
 } as const;
 
 // Fade & Slide Animations
