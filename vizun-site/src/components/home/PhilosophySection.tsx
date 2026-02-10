@@ -47,7 +47,7 @@ export const PhilosophySection = () => {
                             The Manifesto
                         </h3>
                         <p className="text-2xl md:text-4xl font-bold leading-tight uppercase tracking-tight text-[var(--color-jet-black)] mb-8">
-                            "We do not design for comfort. <br /> We design for <span className="text-[var(--color-alert-red)]">impact</span>."
+                            "We do not design for comfort. We design for <span className="text-[var(--color-alert-red)]">impact</span>."
                         </p>
                         <p className="text-lg md:text-xl text-[var(--color-gray-600)] leading-relaxed font-medium">
                             VIZUN is an exploration of raw aesthetics and industrial precision.

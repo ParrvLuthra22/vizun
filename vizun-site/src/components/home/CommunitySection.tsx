@@ -60,7 +60,7 @@ export const CommunitySection = () => {
         <section className="py-32 bg-[var(--color-alert-red)] text-[var(--color-jet-black)] relative overflow-hidden">
 
             {/* Marquee Background - Maximalist & Velocity Based */}
-            <div className="absolute top-1/2 left-0 -translate-y-1/2 w-full overflow-hidden whitespace-nowrap opacity-100 mix-blend-overlay pointer-events-none">
+            <div className="absolute top-1/2 left-0 -translate-y-1/2 w-full overflow-hidden whitespace-nowrap opacity-30 mix-blend-overlay pointer-events-none">
                 <MarqueeText baseVelocity={5}>JOIN THE CULT</MarqueeText>
             </div>
 
