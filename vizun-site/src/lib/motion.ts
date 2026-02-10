@@ -115,15 +115,15 @@ export const fadeIn = {
   }
 };
 
-// Slam Up - Aggressive reveal
+// Slam Up - Confident reveal (Reduced distance, no drift)
 export const slamUp = {
-  hidden: { opacity: 0, y: 100 },
+  hidden: { opacity: 0, y: 40 },
   visible: {
     opacity: 1,
     y: 0,
     transition: {
       duration: durations.medium,
-      ease: easings.aggressive,
+      ease: easings.luxury, // Switched to luxury for smoothness
     }
   }
 };
@@ -135,41 +135,36 @@ export const maskReveal = {
     clipPath: 'inset(0 0 0 0)',
     transition: {
       duration: durations.slow,
-      ease: easings.aggressive,
+      ease: easings.luxury,
     }
   }
 };
 
-// Impact Variant - Hard entry with scale
+// Impact Variant - Confident entry (No CHEAP BLUR/SCALE)
 export const impactVar = {
-  hidden: { opacity: 0, scale: 1.1, filter: 'blur(10px)' },
+  hidden: { opacity: 0, y: 20 },
   visible: {
     opacity: 1,
-    scale: 1,
-    filter: 'blur(0px)',
+    y: 0,
     transition: {
-      duration: 0.4,
-      ease: easings.impact
+      duration: 0.6,
+      ease: easings.luxury
     }
   }
 };
 
-// Tilt Enter - 3D rotation on load
+// Tilt Enter - Stabilized (No 3D Wobble)
 export const tiltEnter = {
   hidden: {
     opacity: 0,
-    scale: 1.2,
-    rotateX: 5,
-    y: 50
+    scale: 1.1,
   },
   visible: {
     opacity: 1,
-    scale: 1.1,
-    rotateX: 0,
-    y: 0,
+    scale: 1, // Slow settle
     transition: {
-      duration: 1.2,
-      ease: [0.16, 1, 0.3, 1] // Custom luxury ease
+      duration: 1.5,
+      ease: [0.16, 1, 0.3, 1] as const
     }
   }
 };

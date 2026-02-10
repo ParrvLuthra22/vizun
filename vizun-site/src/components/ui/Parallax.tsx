@@ -37,8 +37,9 @@ export const Parallax = ({
     const finalX = lag ? smoothX : clampedX;
 
     return (
-        <div ref={ref} className={className}>
+        <div ref={ref} className={`${className} w-full h-full`}>
             <motion.div
+                className="w-full h-full"
                 style={{
                     y: direction === 'vertical' ? finalY : 0,
                     x: direction === 'horizontal' ? finalX : 0,

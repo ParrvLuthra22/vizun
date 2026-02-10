@@ -4,60 +4,55 @@ export const Footer = () => {
     return (
         <footer className="section section-secondary border-top">
             <div className="container">
-                <div style={{
-                    display: 'grid',
-                    gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
-                    gap: 'var(--space-12)',
-                    marginBottom: 'var(--space-12)',
-                }}>
-                    {/* Shop */}
-                    <div>
-                        <p className="label-base" style={{ marginBottom: 'var(--space-4)' }}>SHOP</p>
-                        <nav style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-3)' }}>
-                            <Link href="/shop" className="body-sm">All Products</Link>
-                            <Link href="/shop?filter=new" className="body-sm">New Drops</Link>
-                            <Link href="/shop?filter=archive" className="body-sm">Archive</Link>
+                <div className="grid grid-cols-2 md:grid-cols-12 gap-8 mb-12">
+                    {/* Shop - 2 Cols */}
+                    <div className="col-span-1 md:col-span-2">
+                        <p className="label-base mb-4">SHOP</p>
+                        <nav className="flex flex-col gap-3">
+                            <Link href="/shop" className="body-sm hover:text-[var(--color-alert-red)] transition-colors">All Products</Link>
+                            <Link href="/shop?filter=new" className="body-sm hover:text-[var(--color-alert-red)] transition-colors">New Drops</Link>
+                            <Link href="/shop?filter=archive" className="body-sm hover:text-[var(--color-alert-red)] transition-colors">Archive</Link>
                         </nav>
                     </div>
 
-                    {/* Brand */}
-                    <div>
-                        <p className="label-base" style={{ marginBottom: 'var(--space-4)' }}>BRAND</p>
-                        <nav style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-3)' }}>
-                            <Link href="/brand" className="body-sm">Philosophy</Link>
-                            <Link href="/brand#story" className="body-sm">Story</Link>
-                            <Link href="/brand#craftsmanship" className="body-sm">Craftsmanship</Link>
+                    {/* Brand - 2 Cols */}
+                    <div className="col-span-1 md:col-span-2">
+                        <p className="label-base mb-4">BRAND</p>
+                        <nav className="flex flex-col gap-3">
+                            <Link href="/brand" className="body-sm hover:text-[var(--color-alert-red)] transition-colors">Philosophy</Link>
+                            <Link href="/brand#story" className="body-sm hover:text-[var(--color-alert-red)] transition-colors">Story</Link>
+                            <Link href="/brand#craftsmanship" className="body-sm hover:text-[var(--color-alert-red)] transition-colors">Craftsmanship</Link>
                         </nav>
                     </div>
 
-                    {/* Support */}
-                    <div>
-                        <p className="label-base" style={{ marginBottom: 'var(--space-4)' }}>SUPPORT</p>
-                        <nav style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-3)' }}>
-                            <Link href="/contact" className="body-sm">Contact</Link>
-                            <Link href="/shipping" className="body-sm">Shipping</Link>
-                            <Link href="/returns" className="body-sm">Returns</Link>
-                            <Link href="/size-guide" className="body-sm">Size Guide</Link>
+                    {/* Support - 2 Cols */}
+                    <div className="col-span-1 md:col-span-2">
+                        <p className="label-base mb-4">SUPPORT</p>
+                        <nav className="flex flex-col gap-3">
+                            <Link href="/contact" className="body-sm hover:text-[var(--color-alert-red)] transition-colors">Contact</Link>
+                            <Link href="/shipping" className="body-sm hover:text-[var(--color-alert-red)] transition-colors">Shipping</Link>
+                            <Link href="/returns" className="body-sm hover:text-[var(--color-alert-red)] transition-colors">Returns</Link>
+                            <Link href="/size-guide" className="body-sm hover:text-[var(--color-alert-red)] transition-colors">Size Guide</Link>
                         </nav>
                     </div>
 
-                    {/* Legal */}
-                    <div>
-                        <p className="label-base" style={{ marginBottom: 'var(--space-4)' }}>LEGAL</p>
-                        <nav style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-3)' }}>
-                            <Link href="/privacy" className="body-sm">Privacy</Link>
-                            <Link href="/terms" className="body-sm">Terms</Link>
+                    {/* Legal - 2 Cols */}
+                    <div className="col-span-1 md:col-span-2">
+                        <p className="label-base mb-4">LEGAL</p>
+                        <nav className="flex flex-col gap-3">
+                            <Link href="/privacy" className="body-sm hover:text-[var(--color-alert-red)] transition-colors">Privacy</Link>
+                            <Link href="/terms" className="body-sm hover:text-[var(--color-alert-red)] transition-colors">Terms</Link>
                         </nav>
                     </div>
 
-                    {/* Connect */}
-                    <div>
-                        <p className="label-base" style={{ marginBottom: 'var(--space-4)' }}>CONNECT</p>
-                        <nav style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-3)' }}>
-                            <a href="https://instagram.com/vizun" target="_blank" rel="noopener noreferrer" className="body-sm">
+                    {/* Connect - 4 Cols (Larger) */}
+                    <div className="col-span-2 md:col-span-4 md:text-right">
+                        <p className="label-base mb-4">CONNECT</p>
+                        <nav className="flex flex-col gap-3 md:items-end">
+                            <a href="https://instagram.com/vizun" target="_blank" rel="noopener noreferrer" className="body-sm hover:text-[var(--color-alert-red)] transition-colors">
                                 Instagram
                             </a>
-                            <a href="mailto:hello@vizun.com" className="body-sm">Email</a>
+                            <a href="mailto:hello@vizun.com" className="body-sm hover:text-[var(--color-alert-red)] transition-colors">Email</a>
                         </nav>
                     </div>
                 </div>

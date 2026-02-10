@@ -82,65 +82,23 @@ export const FeaturedDropSection = () => {
                     </motion.div>
                 </div>
 
-                {/* Editorial "Scattered" Layout - CSS Grid Anchored */}
-                <div className="relative w-full grid grid-cols-1 md:grid-cols-12 gap-y-12 md:gap-y-0 md:gap-x-8 items-start">
-
-                    {/* Item 1 - Hero Product (Left, Large) */}
-                    <div className="relative z-10 md:col-span-7 md:row-span-2">
-                        <Parallax speed={-0.05}>
-                            <motion.div
-                                initial={{ opacity: 0, y: 100 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-                            >
-                                <EditorialCard
-                                    {...featuredProducts[0]}
-                                    aspectRatio="portrait"
-                                />
-                            </motion.div>
-                        </Parallax>
-                    </div>
-
-                    {/* Item 2 - Accessory / Secondary (Right Top, Overlapping) */}
-                    {/* Negative margin on desktop to pull it up and overlap, or just grid placement */}
-                    <div className="relative z-20 md:col-span-5 md:col-start-8 md:mt-24">
-                        <Parallax speed={0.1}>
-                            <motion.div
-                                initial={{ opacity: 0, y: 100 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-                            >
-                                <EditorialCard
-                                    {...featuredProducts[1]}
-                                    aspectRatio="square"
-                                />
-                            </motion.div>
-                        </Parallax>
-                    </div>
-
-                    {/* Item 3 - Anchor (Bottom Center/Right) */}
-                    <div className="relative z-10 md:col-span-6 md:col-start-6 md:mt-[-10%]">
-                        <Parallax speed={0.05}>
-                            <motion.div
-                                initial={{ opacity: 0, y: 100 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ duration: 0.8, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
-                            >
-                                <EditorialCard
-                                    {...featuredProducts[2]}
-                                    aspectRatio="landscape"
-                                />
-                            </motion.div>
-                        </Parallax>
-                    </div>
-
-                    {/* Background Graphic - Connecting Line */}
-                    <svg className="absolute top-0 left-0 w-full h-full pointer-events-none z-0 opacity-50 mix-blend-multiply hidden md:block">
-                        <line x1="20%" y1="20%" x2="80%" y2="80%" stroke="var(--color-jet-black)" strokeWidth="1" />
-                    </svg>
+                {/* Editorial Layout - Proper 3-Col Grid */}
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    {featuredProducts.map((product, index) => (
+                        <motion.div
+                            key={product.id}
+                            initial={{ opacity: 0, y: 40 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.8, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
+                        >
+                            <EditorialCard
+                                {...product}
+                                aspectRatio="portrait"
+                                className="w-full h-full"
+                            />
+                        </motion.div>
+                    ))}
                 </div>
 
                 {/* Giant Scrolling Text Background */}
