@@ -1,9 +1,10 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { Button } from '@/components/ui/Button';
 import Image from 'next/image';
+import { durations, easings, slamUp, maskReveal, staggerContainer } from '@/lib/motion';
 
 export const HeroSection = () => {
     const containerRef = useRef<HTMLDivElement>(null);
@@ -12,276 +13,92 @@ export const HeroSection = () => {
         offset: ["start start", "end start"]
     });
 
-    // Parallax effect for image
-    const imageY = useTransform(scrollYProgress, [0, 1], ['0%', '30%']);
-    const imageScale = useTransform(scrollYProgress, [0, 1], [1, 1.1]);
-
-    // Text reveal animation variants
-    const containerVariants = {
-        hidden: { opacity: 0 },
-        visible: {
-            opacity: 1,
-            transition: {
-                staggerChildren: 0.12,
-                delayChildren: 0.3,
-            }
-        }
-    };
-
-    const wordVariants = {
-        hidden: {
-            opacity: 0,
-            y: 50,
-            rotateX: -90,
-        },
-        visible: {
-            opacity: 1,
-            y: 0,
-            rotateX: 0,
-            transition: {
-                duration: 0.8,
-                ease: [0.16, 1, 0.3, 1], // Luxury easing
-            }
-        }
-    };
-
-    const lineVariants = {
-        hidden: {
-            opacity: 0,
-            y: 30,
-        },
-        visible: {
-            opacity: 1,
-            y: 0,
-            transition: {
-                duration: 1,
-                ease: [0.16, 1, 0.3, 1],
-            }
-        }
-    };
-
-    const ctaVariants = {
-        hidden: {
-            opacity: 0,
-            scale: 0.9,
-        },
-        visible: {
-            opacity: 1,
-            scale: 1,
-            transition: {
-                duration: 0.8,
-                delay: 1.5,
-                ease: [0.16, 1, 0.3, 1],
-            }
-        }
-    };
+    const imageScale = useTransform(scrollYProgress, [0, 1], [1, 1.3]);
+    const imageStart = useTransform(scrollYProgress, [0, 1], ['0%', '15%']);
 
     return (
         <section
             ref={containerRef}
-            style={{
-                position: 'relative',
-                minHeight: '100vh',
-                display: 'flex',
-                alignItems: 'center',
-                overflow: 'hidden',
-                backgroundColor: 'var(--color-jet-black)',
-            }}
+            className="flex flex-col justify-end min-h-screen relative overflow-hidden bg-[var(--color-off-white)] text-[var(--color-jet-black)]"
+            style={{ paddingBottom: 'var(--space-16)' }}
         >
-            {/* Background gradient overlay */}
-            <div style={{
-                position: 'absolute',
-                inset: 0,
-                background: 'radial-gradient(circle at 30% 50%, rgba(0, 102, 255, 0.15) 0%, transparent 50%)',
-                pointerEvents: 'none',
-            }} />
-
-            {/* Product Image with Parallax */}
-            <motion.div
-                style={{
-                    position: 'absolute',
-                    right: '-10%',
-                    top: '50%',
-                    y: imageY,
-                    scale: imageScale,
-                    width: '50%',
-                    height: '120%',
-                    marginTop: '-60%',
-                }}
-            >
-                <div style={{
-                    position: 'relative',
-                    width: '100%',
-                    height: '100%',
-                    opacity: 0.4,
-                    mixBlendMode: 'luminosity',
-                }}>
+            {/* Background Image / Texture - Asymmetrical placement */}
+            <div className="absolute top-0 right-0 w-[85%] h-[90%] overflow-hidden z-0">
+                <motion.div
+                    style={{ scale: imageScale, y: imageStart, height: '100%', width: '100%', position: 'relative' }}
+                >
                     <Image
                         src="/hero-product.jpg"
-                        alt="VIZUN Collection"
+                        alt="VIZUN ARMORED"
                         fill
-                        style={{
-                            objectFit: 'cover',
-                            objectPosition: 'center',
-                        }}
+                        className="object-cover grayscale contrast-125 brightness-90"
                         priority
-                        quality={90}
                     />
+                </motion.div>
+                {/* Hard Cut Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-l from-transparent via-transparent to-[var(--color-off-white)]" style={{ width: '20%' }} />
+            </div>
 
-                    {/* Gradient mask for artistic crop */}
-                    <div style={{
-                        position: 'absolute',
-                        inset: 0,
-                        background: 'linear-gradient(to right, var(--color-jet-black) 0%, transparent 40%, transparent 60%, var(--color-jet-black) 100%)',
-                    }} />
-                </div>
-            </motion.div>
-
-            {/* Content */}
-            <div className="container" style={{
-                position: 'relative',
-                zIndex: 2,
-                paddingTop: 'var(--space-32)',
-                paddingBottom: 'var(--space-32)',
-            }}>
+            <div className="container relative z-10 pointer-events-none">
                 <motion.div
-                    variants={containerVariants}
+                    variants={staggerContainer('fast')}
                     initial="hidden"
                     animate="visible"
-                    style={{
-                        maxWidth: '900px',
-                    }}
+                    className="max-w-[1400px]"
                 >
-                    {/* Season Label */}
-                    <motion.div variants={lineVariants}>
-                        <p className="label-lg" style={{
-                            marginBottom: 'var(--space-8)',
-                            color: 'var(--color-amber)',
-                            letterSpacing: '0.15em',
-                        }}>
-                            SPRING/SUMMER 2026
-                        </p>
+                    {/* Season Label - Rotated/Vertical */}
+                    <motion.div variants={slamUp} className="absolute -left-8 top-0 origin-bottom-left -rotate-90 hidden md:block">
+                        <span className="text-xs font-bold tracking-widest uppercase">Spring / Summer 2026</span>
                     </motion.div>
 
-                    {/* Headline with word-by-word reveal */}
-                    <div style={{
-                        marginBottom: 'var(--space-8)',
-                        perspective: '1000px',
-                    }}>
+                    {/* Giant Typography */}
+                    <div className="overflow-hidden mb-[-2vw]">
                         <motion.h1
-                            className="headline-hero"
-                            style={{
-                                fontSize: 'clamp(4rem, 12vw, 10rem)',
-                                lineHeight: 0.9,
-                                letterSpacing: '-0.04em',
-                                marginBottom: 0,
-                            }}
+                            variants={slamUp}
+                            className="text-[12vw] leading-[0.85] font-bold tracking-tighter uppercase font-serif"
                         >
-                            <div style={{ overflow: 'hidden', marginBottom: 'var(--space-4)' }}>
-                                <motion.span
-                                    variants={wordVariants}
-                                    style={{ display: 'inline-block' }}
-                                >
-                                    QUIET
-                                </motion.span>
-                            </div>
-                            <div style={{ overflow: 'hidden', marginBottom: 'var(--space-4)' }}>
-                                <motion.span
-                                    variants={wordVariants}
-                                    style={{ display: 'inline-block' }}
-                                >
-                                    LUXURY
-                                </motion.span>
-                            </div>
-                            <div style={{ overflow: 'hidden' }}>
-                                <motion.span
-                                    variants={wordVariants}
-                                    style={{
-                                        display: 'inline-block',
-                                        color: 'var(--color-off-white-subtle)',
-                                    }}
-                                >
-                                    REDEFINED
-                                </motion.span>
-                            </div>
+                            VIZUN
                         </motion.h1>
                     </div>
 
-                    {/* Subtext */}
-                    <motion.div variants={lineVariants}>
-                        <p className="body-xl" style={{
-                            marginBottom: 'var(--space-12)',
-                            maxWidth: '500px',
-                            color: 'var(--color-off-white-subtle)',
-                            lineHeight: 1.6,
-                        }}>
-                            Precision tailoring meets modern streetwear.
-                            Limited to 100 pieces.
-                        </p>
-                    </motion.div>
+                    <div className="flex flex-col md:flex-row items-end gap-8">
+                        <div className="overflow-hidden md:w-2/3">
+                            <motion.h1
+                                variants={slamUp}
+                                className="text-[12vw] leading-[0.85] font-bold tracking-tighter uppercase font-serif text-[var(--color-electric-blue)]"
+                            >
+                                ARMORED
+                            </motion.h1>
+                        </div>
 
-                    {/* CTA */}
-                    <motion.div variants={ctaVariants}>
-                        <Button
-                            variant="primary"
-                            size="lg"
-                            style={{
-                                padding: 'var(--space-5) var(--space-16)',
-                                fontSize: 'var(--text-base)',
-                                letterSpacing: '0.1em',
-                            }}
-                        >
-                            EXPLORE COLLECTION
-                        </Button>
-                    </motion.div>
+                        <motion.div variants={maskReveal} className="md:w-1/3 pb-8 pointer-events-auto">
+                            <p className="text-xl md:text-2xl font-bold leading-tight mb-8 max-w-md">
+                                WEAPONIZE YOUR WARDROBE. <br />
+                                PRECISION TAILORING FOR THE URBAN WARZONE.
+                            </p>
+                            <div className="flex gap-4">
+                                <Button size="lg" variant="primary">SHOP DROP 01</Button>
+                                <Button size="lg" variant="secondary">L00KBOOK</Button>
+                            </div>
+                        </motion.div>
+                    </div>
 
-                    {/* Scroll Indicator */}
-                    <motion.div
-                        variants={ctaVariants}
-                        style={{
-                            position: 'absolute',
-                            bottom: 'var(--space-12)',
-                            left: 0,
-                            display: 'flex',
-                            alignItems: 'center',
-                            gap: 'var(--space-4)',
-                        }}
-                    >
-                        <motion.div
-                            animate={{
-                                y: [0, 10, 0],
-                            }}
-                            transition={{
-                                duration: 2,
-                                repeat: Infinity,
-                                ease: "easeInOut",
-                            }}
-                            style={{
-                                width: '1px',
-                                height: '40px',
-                                backgroundColor: 'var(--color-off-white-faint)',
-                            }}
-                        />
-                        <p className="body-sm" style={{
-                            color: 'var(--color-off-white-faint)',
-                            letterSpacing: '0.1em',
-                        }}>
-                            SCROLL
-                        </p>
-                    </motion.div>
                 </motion.div>
             </div>
 
-            {/* Ambient light effect */}
-            <div style={{
-                position: 'absolute',
-                bottom: 0,
-                left: 0,
-                right: 0,
-                height: '200px',
-                background: 'linear-gradient(to top, var(--color-electric-blue-subtle) 0%, transparent 100%)',
-                pointerEvents: 'none',
-            }} />
+            {/* Kinetic Scroll Indicator */}
+            <motion.div
+                className="absolute bottom-8 left-8 z-20 overflow-hidden"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 1, duration: durations.slow }}
+            >
+                <motion.div
+                    animate={{ y: ['-100%', '0%', '100%'] }}
+                    transition={{ duration: 1.5, repeat: Infinity, ease: easings.aggressive }}
+                    className="h-16 w-[2px] bg-[var(--color-jet-black)]"
+                />
+            </motion.div>
         </section>
     );
 };

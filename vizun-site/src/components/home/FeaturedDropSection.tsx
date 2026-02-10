@@ -2,7 +2,8 @@
 
 import { ProductCard } from '@/components/ui/ProductCard';
 import { Button } from '@/components/ui/Button';
-import { Reveal, RevealText } from '@/components/ui/Reveal';
+import { motion } from 'framer-motion';
+import { slamUp, staggerContainer } from '@/lib/motion';
 
 export const FeaturedDropSection = () => {
     const featuredProducts = [
@@ -33,61 +34,62 @@ export const FeaturedDropSection = () => {
     ];
 
     return (
-        <section className="section section-secondary">
+        <section className="py-32 bg-[var(--color-off-white)] text-[var(--color-jet-black)] relative">
             <div className="container">
-                {/* Section Header */}
-                <div style={{ textAlign: 'center', marginBottom: 'var(--space-16)' }}>
-                    <Reveal width="100%">
-                        <p className="label-lg text-luxury" style={{ marginBottom: 'var(--space-6)' }}>
-                            CURRENT DROP
+                {/* Header - Scattered */}
+                <div className="flex flex-col md:flex-row justify-between items-end mb-24 gap-8">
+                    <motion.div
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={{ once: true }}
+                        variants={slamUp}
+                    >
+                        <p className="font-bold tracking-widest uppercase text-sm mb-4 text-[var(--color-gray-500)]">
+                            DROP 01 / SPRING 26
                         </p>
-                    </Reveal>
+                        <h2 className="text-8xl md:text-9xl leading-[0.8] font-bold font-serif tracking-tighter uppercase">
+                            MODERN <br /> ESSENTIALS
+                        </h2>
+                    </motion.div>
 
-                    <div style={{ display: 'flex', justifyContent: 'center', marginBottom: 'var(--space-4)' }}>
-                        <RevealText
-                            text="Spring/Summer 2026"
-                            className="headline-2"
-                        />
-                    </div>
-
-                    <Reveal delay={0.2} width="100%">
-                        <p className="headline-4" style={{
-                            color: 'var(--color-off-white-subtle)',
-                            fontWeight: 'var(--font-regular)',
-                        }}>
-                            Modern Essentials
-                        </p>
-                    </Reveal>
+                    <motion.div
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={{ once: true }}
+                        variants={slamUp}
+                        className="md:mb-4"
+                    >
+                        <Button variant="primary" size="lg">VIEW FULL COLLECTION</Button>
+                    </motion.div>
                 </div>
 
-                {/* Product Grid */}
-                <div style={{
-                    display: 'grid',
-                    gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
-                    gap: 'var(--space-12)',
-                    marginBottom: 'var(--space-16)',
-                }}>
+                {/* Experimental "Grid" - Offset columns */}
+                <motion.div
+                    variants={staggerContainer('medium')}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, margin: "-10%" }}
+                    className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-16"
+                >
                     {featuredProducts.map((product, index) => (
-                        <Reveal key={product.id} delay={index * 0.15} width="100%">
+                        <motion.div
+                            key={product.id}
+                            variants={slamUp}
+                            className={`
+                                ${index === 1 ? 'md:mt-32' : ''} 
+                                ${index === 2 ? 'md:mt-16' : ''}
+                            `}
+                        >
                             <ProductCard {...product} />
-                        </Reveal>
+                        </motion.div>
                     ))}
-                </div>
+                </motion.div>
 
-                {/* Scarcity Message & CTA */}
-                <div style={{ textAlign: 'center' }}>
-                    <Reveal delay={0.4} width="100%">
-                        <p className="body-base text-luxury" style={{
-                            marginBottom: 'var(--space-8)',
-                            letterSpacing: '0.05em',
-                        }}>
-                            Limited to 100 pieces — Each drop sells out
-                        </p>
-
-                        <Button variant="accent" size="lg">
-                            VIEW FULL COLLECTION
-                        </Button>
-                    </Reveal>
+                {/* Giant Scrolling Text Background (Optional Visual Weapon) */}
+                <div className="absolute left-0 bottom-0 pointer-events-none opacity-5 w-full overflow-hidden leading-none">
+                    <span className="text-[20vw] font-bold font-serif tracking-tighter whitespace-nowrap">
+                        LIMITED EDITION LIMITED EDITION
+                    </span>
                 </div>
             </div>
         </section>

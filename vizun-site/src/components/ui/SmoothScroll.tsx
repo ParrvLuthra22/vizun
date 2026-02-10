@@ -3,6 +3,12 @@
 import { useEffect } from 'react';
 import Lenis from 'lenis';
 
+/**
+ * SmoothScroll - Luxury smooth scrolling with Lenis
+ * 
+ * Provides buttery-smooth scroll experience across the site
+ * Configured for luxury feel with custom easing
+ */
 export const SmoothScroll = () => {
     useEffect(() => {
         const lenis = new Lenis({
@@ -13,6 +19,7 @@ export const SmoothScroll = () => {
             smoothWheel: true,
             wheelMultiplier: 1,
             touchMultiplier: 2,
+            infinite: false,
         });
 
         function raf(time: number) {

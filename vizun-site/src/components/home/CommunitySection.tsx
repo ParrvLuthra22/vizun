@@ -1,59 +1,53 @@
 import { Button } from '@/components/ui/Button';
-import { Reveal } from '@/components/ui/Reveal';
+import { motion } from 'framer-motion';
+import { slamUp, staggerContainer } from '@/lib/motion';
 
 export const CommunitySection = () => {
-    // Mock Instagram images - will be replaced with API integration
     const instagramImages = Array(6).fill(null);
 
     return (
-        <section className="section section-secondary">
-            <div className="container" style={{ textAlign: 'center' }}>
-                <Reveal width="100%">
-                    <p className="label-lg text-luxury" style={{ marginBottom: 'var(--space-6)' }}>
-                        COMMUNITY
-                    </p>
-                </Reveal>
+        <section className="py-32 bg-[var(--color-off-white)] text-[var(--color-jet-black)] relative overflow-hidden">
 
-                <Reveal delay={0.1} width="100%">
-                    <h2 className="headline-2" style={{ marginBottom: 'var(--space-12)' }}>
-                        Join the Movement
+            {/* Marquee Background */}
+            <div className="absolute top-0 w-full overflow-hidden whitespace-nowrap opacity-5 text-[15vw] font-bold font-serif leading-none tracking-tighter select-none pointer-events-none">
+                JOIN THE CULT JOIN THE CULT JOIN THE CULT
+            </div>
+
+            <div className="container relative z-10">
+                <motion.div
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true }}
+                    variants={slamUp}
+                    className="text-center mb-16"
+                >
+                    <h2 className="text-6xl md:text-8xl font-bold uppercase tracking-tighter leading-none mb-8">
+                        VIZUN <span className="text-stroke text-transparent" style={{ WebkitTextStroke: '2px var(--color-jet-black)' }}>ARCHIVE</span>
                     </h2>
-                </Reveal>
+                    <Button variant="primary">@VIZUN.OFFICIAL</Button>
+                </motion.div>
 
-                {/* Instagram Grid */}
-                <Reveal delay={0.3} width="100%">
-                    <div style={{
-                        display: 'grid',
-                        gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
-                        gap: 'var(--space-4)',
-                        marginBottom: 'var(--space-8)',
-                    }}>
-                        {instagramImages.map((_, index) => (
-                            <div
-                                key={index}
-                                style={{
-                                    aspectRatio: '1',
-                                    backgroundColor: 'var(--color-gray-800)',
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                    justifyContent: 'center',
-                                }}
-                            >
-                                <p className="body-sm text-muted">Instagram</p>
+                {/* Instagram Grid - Raw & Tight */}
+                <motion.div
+                    variants={staggerContainer('fast')}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true }}
+                    className="grid grid-cols-2 md:grid-cols-6 gap-0 border-t border-l border-[var(--color-jet-black)]"
+                >
+                    {instagramImages.map((_, index) => (
+                        <motion.div
+                            key={index}
+                            variants={slamUp}
+                            className="aspect-square bg-[var(--color-gray-900)] border-r border-b border-[var(--color-jet-black)] relative group overflow-hidden"
+                        >
+                            <div className="absolute inset-0 flex items-center justify-center text-[var(--color-off-white)] opacity-50 font-bold uppercase tracking-widest text-xs">
+                                IMG {index + 1}
                             </div>
-                        ))}
-                    </div>
-                </Reveal>
-
-                <Reveal delay={0.5} width="100%">
-                    <p className="body-lg" style={{ marginBottom: 'var(--space-6)' }}>
-                        @vizun
-                    </p>
-
-                    <Button variant="ghost">
-                        Follow on Instagram →
-                    </Button>
-                </Reveal>
+                            <div className="absolute inset-0 bg-[var(--color-electric-blue)] mix-blend-color opacity-0 group-hover:opacity-50 transition-opacity duration-200" />
+                        </motion.div>
+                    ))}
+                </motion.div>
             </div>
         </section>
     );

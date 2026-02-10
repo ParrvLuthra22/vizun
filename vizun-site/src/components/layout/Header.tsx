@@ -2,105 +2,98 @@
 
 import Link from 'next/link';
 import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { durations, easings } from '@/lib/motion';
 
 export const Header = () => {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
+    const navItems = [
+        { name: 'SHOP', href: '/shop' },
+        { name: 'BRAND', href: '/brand' },
+    ];
+
     return (
         <>
-            <header style={{
-                position: 'sticky',
-                top: 0,
-                zIndex: 'var(--z-sticky)',
-                backgroundColor: 'var(--color-jet-black)',
-                borderBottom: '1px solid var(--border-subtle)',
-            }}>
-                <div className="container" style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'space-between',
-                    padding: 'var(--space-4) var(--space-6)',
-                }}>
-                    {/* Mobile Menu Button */}
-                    <button
-                        className="btn btn-ghost"
-                        style={{ display: 'none' }}
-                        onClick={() => setMobileMenuOpen(true)}
-                        aria-label="Open menu"
-                    >
-                        ☰
-                    </button>
-
-                    {/* Logo */}
-                    <Link href="/" className="headline-4" style={{ margin: 0 }}>
+            <motion.header
+                initial={{ y: -100 }}
+                animate={{ y: 0 }}
+                transition={{ duration: durations.slow, ease: easings.aggressive }}
+                className="fixed top-0 left-0 right-0 z-[var(--z-sticky)] mix-blend-exclusion text-white p-6 md:p-8 flex justify-between items-start pointer-events-none"
+            >
+                {/* Logo - Anchored Top Left */}
+                <Link href="/" className="pointer-events-auto">
+                    <span className="font-serif font-bold text-4xl md:text-5xl leading-none tracking-tighter hover:opacity-50 transition-opacity">
                         VIZUN
+                    </span>
+                </Link>
+
+                {/* Desktop Nav - Anchored Top Right */}
+                <nav className="hidden md:flex gap-8 pointer-events-auto items-center">
+                    {navItems.map((item) => (
+                        <Link key={item.name} href={item.href} className="font-bold text-sm tracking-widest hover:line-through transition-all">
+                            {item.name}
+                        </Link>
+                    ))}
+                    <Link href="/cart" className="font-bold text-sm tracking-widest hover:line-through transition-all">
+                        CART (0)
                     </Link>
+                </nav>
 
-                    {/* Desktop Navigation */}
-                    <nav className="nav" style={{ display: 'flex' }}>
-                        <Link href="/shop" className="nav-link">Shop</Link>
-                        <Link href="/brand" className="nav-link">Brand</Link>
-                        <Link href="/cart" className="nav-link">
-                            Cart
-                            <span style={{
-                                marginLeft: 'var(--space-2)',
-                                padding: '2px 6px',
-                                backgroundColor: 'var(--color-electric-blue)',
-                                borderRadius: 'var(--radius-sm)',
-                                fontSize: 'var(--text-xs)',
-                            }}>
-                                0
-                            </span>
-                        </Link>
-                    </nav>
-                </div>
-            </header>
+                {/* Mobile Menu Button */}
+                <button
+                    onClick={() => setMobileMenuOpen(true)}
+                    className="md:hidden pointer-events-auto font-bold text-sm tracking-widest"
+                >
+                    MENU
+                </button>
+            </motion.header>
 
-            {/* Mobile Menu Overlay */}
-            {mobileMenuOpen && (
-                <div style={{
-                    position: 'fixed',
-                    top: 0,
-                    left: 0,
-                    right: 0,
-                    bottom: 0,
-                    backgroundColor: 'var(--color-jet-black)',
-                    zIndex: 'var(--z-modal)',
-                    padding: 'var(--space-6)',
-                }}>
-                    <div style={{
-                        display: 'flex',
-                        justifyContent: 'space-between',
-                        alignItems: 'center',
-                        marginBottom: 'var(--space-12)',
-                    }}>
-                        <span className="headline-4">Menu</span>
-                        <button
-                            className="btn btn-ghost"
-                            onClick={() => setMobileMenuOpen(false)}
-                            aria-label="Close menu"
-                        >
-                            ✕
-                        </button>
-                    </div>
+            {/* Mobile Menu Overlay - Aggressive Full Screen */}
+            <AnimatePresence>
+                {mobileMenuOpen && (
+                    <motion.div
+                        initial={{ clipPath: 'inset(0 0 100% 0)' }}
+                        animate={{ clipPath: 'inset(0 0 0 0)' }}
+                        exit={{ clipPath: 'inset(100% 0 0 0)' }}
+                        transition={{ duration: durations.medium, ease: easings.aggressive }}
+                        className="fixed inset-0 bg-[var(--color-electric-blue)] z-[var(--z-modal)] flex flex-col p-6"
+                    >
+                        <div className="flex justify-between items-start mb-12">
+                            <Link href="/" onClick={() => setMobileMenuOpen(false)}>
+                                <span className="font-serif font-bold text-4xl leading-none tracking-tighter text-white">
+                                    VIZUN
+                                </span>
+                            </Link>
+                            <button
+                                onClick={() => setMobileMenuOpen(false)}
+                                className="font-bold text-sm tracking-widest text-white"
+                            >
+                                CLOSE
+                            </button>
+                        </div>
 
-                    <nav style={{
-                        display: 'flex',
-                        flexDirection: 'column',
-                        gap: 'var(--space-6)',
-                    }}>
-                        <Link href="/shop" className="headline-3" onClick={() => setMobileMenuOpen(false)}>
-                            Shop
-                        </Link>
-                        <Link href="/brand" className="headline-3" onClick={() => setMobileMenuOpen(false)}>
-                            Brand
-                        </Link>
-                        <Link href="/cart" className="headline-3" onClick={() => setMobileMenuOpen(false)}>
-                            Cart
-                        </Link>
-                    </nav>
-                </div>
-            )}
+                        <nav className="flex flex-col gap-4">
+                            {[...navItems, { name: 'CART (0)', href: '/cart' }].map((item) => (
+                                <Link
+                                    key={item.name}
+                                    href={item.href}
+                                    onClick={() => setMobileMenuOpen(false)}
+                                    className="text-6xl font-bold font-serif text-white tracking-tighter hover:text-black transition-colors"
+                                >
+                                    {item.name}
+                                </Link>
+                            ))}
+                        </nav>
+
+                        <div className="mt-auto">
+                            <p className="text-white text-sm font-bold tracking-widest uppercase opacity-50">
+                                Spring / Summer 2026
+                            </p>
+                        </div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
         </>
     );
 };

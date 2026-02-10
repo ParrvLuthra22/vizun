@@ -2,6 +2,7 @@
 
 import { motion, useInView, useAnimation, Variants } from 'framer-motion';
 import { useRef, useEffect } from 'react';
+import { durations, easings, viewportMargin } from '@/lib/motion';
 
 interface RevealProps {
     children: React.ReactNode;
@@ -17,13 +18,13 @@ export const Reveal = ({
     children,
     width = 'fit-content',
     delay = 0,
-    duration = 0.8,
+    duration = durations.slow,
     y = 30,
     className = '',
     triggerOnce = true,
 }: RevealProps) => {
     const ref = useRef(null);
-    const isInView = useInView(ref, { once: triggerOnce, margin: "-50px" });
+    const isInView = useInView(ref, { once: triggerOnce, margin: viewportMargin.normal as "-50px" });
     const mainControls = useAnimation();
 
     useEffect(() => {
@@ -32,7 +33,6 @@ export const Reveal = ({
         }
     }, [isInView, mainControls]);
 
-    // Use Variants type for defining animation states
     const variants: Variants = {
         hidden: { opacity: 0, y: y },
         visible: {
@@ -41,7 +41,7 @@ export const Reveal = ({
             transition: {
                 duration: duration,
                 delay: delay,
-                ease: [0.16, 1, 0.3, 1], // Luxury easing
+                ease: easings.luxury,
             }
         },
     };
@@ -69,7 +69,7 @@ export const RevealText = ({
     className?: string
 }) => {
     const ref = useRef(null);
-    const isInView = useInView(ref, { once: true, margin: "-20px" });
+    const isInView = useInView(ref, { once: true, margin: viewportMargin.normal as "-50px" });
     const controls = useAnimation();
 
     useEffect(() => {
@@ -82,7 +82,10 @@ export const RevealText = ({
         hidden: { opacity: 0 },
         visible: (i = 1) => ({
             opacity: 1,
-            transition: { staggerChildren: 0.03, delayChildren: delay * i },
+            transition: { 
+                staggerChildren: 0.08, 
+                delayChildren: delay * i 
+            },
         }),
     };
 
@@ -92,24 +95,21 @@ export const RevealText = ({
             y: 0,
             rotateX: 0,
             transition: {
-                type: "spring",
-                damping: 30,
-                stiffness: 200,
-                ease: [0.16, 1, 0.3, 1],
-                duration: 0.8
+                duration: durations.slow,
+                ease: easings.luxury,
             },
         },
         hidden: {
             opacity: 0,
-            y: 20,
-            rotateX: -45,
+            y: 30,
+            rotateX: -15,
         },
     };
 
     return (
         <motion.div
             ref={ref}
-            style={{ display: "flex", flexWrap: "wrap", perspective: "800px" }}
+            style={{ display: "flex", flexWrap: "wrap", perspective: "1000px" }}
             variants={container}
             initial="hidden"
             animate={controls}

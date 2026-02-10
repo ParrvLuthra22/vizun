@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
+import { durations, easings } from '@/lib/motion';
 
 interface ProductCardProps {
     id: string;
@@ -15,7 +16,6 @@ interface ProductCardProps {
 }
 
 export const ProductCard: React.FC<ProductCardProps> = ({
-    id,
     name,
     price,
     image,
@@ -29,112 +29,48 @@ export const ProductCard: React.FC<ProductCardProps> = ({
             <motion.div
                 onMouseEnter={() => setIsHovered(true)}
                 onMouseLeave={() => setIsHovered(false)}
-                style={{
-                    position: 'relative',
-                    cursor: 'pointer',
-                }}
+                className="relative cursor-pointer group"
                 whileHover={{ y: -8 }}
-                transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+                transition={{ duration: durations.fast, ease: easings.aggressive }}
             >
-                {/* Image Container */}
-                <div style={{
-                    position: 'relative',
-                    width: '100%',
-                    aspectRatio: '3/4',
-                    overflow: 'hidden',
-                    backgroundColor: 'var(--color-gray-900)',
-                    marginBottom: 'var(--space-4)',
-                }}>
+                {/* Image Container - Sharp Edges */}
+                <div className="relative w-full aspect-[3/4] overflow-hidden bg-[var(--color-gray-900)] mb-4 ring-1 ring-transparent group-hover:ring-[var(--color-alert-red)] transition-all duration-300">
                     <motion.div
                         animate={{
-                            scale: isHovered ? 1.08 : 1,
+                            scale: isHovered ? 1.1 : 1,
                         }}
-                        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-                        style={{
-                            width: '100%',
-                            height: '100%',
-                            position: 'relative',
-                        }}
+                        transition={{ duration: durations.medium, ease: easings.aggressive }}
+                        className="w-full h-full relative"
                     >
                         <Image
                             src={image}
                             alt={name}
                             fill
-                            style={{
-                                objectFit: 'cover',
-                            }}
+                            className="object-cover grayscale group-hover:grayscale-0 transition-all duration-300"
                             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                         />
+                        {/* Glitch Overlay on Hover (Simulated with opacity) */}
+                        <div className={`absolute inset-0 bg-[var(--color-alert-red)] mix-blend-color opacity-0 ${isHovered ? 'opacity-20' : ''} transition-opacity duration-100`} />
                     </motion.div>
 
-                    {/* Limited Stock Indicator */}
+                    {/* Limited Stock Indicator - Hard Tag */}
                     {remaining && remaining < 20 && (
-                        <motion.div
-                            initial={{ opacity: 0, y: 10 }}
-                            animate={{ opacity: isHovered ? 1 : 0, y: isHovered ? 0 : 10 }}
-                            transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-                            style={{
-                                position: 'absolute',
-                                top: 'var(--space-4)',
-                                right: 'var(--space-4)',
-                                padding: 'var(--space-2) var(--space-4)',
-                                backgroundColor: 'rgba(10, 10, 10, 0.9)',
-                                backdropFilter: 'blur(10px)',
-                                border: '1px solid var(--border-subtle)',
-                            }}
-                        >
-                            <p className="body-xs text-luxury">
-                                Only {remaining} left
-                            </p>
-                        </motion.div>
+                        <div className="absolute top-0 right-0 bg-[var(--color-alert-red)] text-white px-3 py-1 text-xs font-bold uppercase tracking-widest">
+                            {remaining} LEFT
+                        </div>
                     )}
                 </div>
 
-                {/* Product Info */}
-                <div style={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    gap: 'var(--space-2)',
-                }}>
-                    <motion.h3
-                        className="headline-4"
-                        animate={{
-                            color: isHovered ? 'var(--color-amber)' : 'var(--color-off-white)',
-                        }}
-                        transition={{ duration: 0.3 }}
-                        style={{
-                            fontSize: 'var(--text-2xl)',
-                            margin: 0,
-                        }}
-                    >
+                {/* Product Info - Aggressive Type */}
+                <div className="flex flex-col gap-1">
+                    <h3 className="text-2xl font-bold uppercase tracking-tighter leading-none group-hover:text-[var(--color-alert-red)] transition-colors">
                         {name}
-                    </motion.h3>
+                    </h3>
 
-                    <motion.p
-                        className="body-lg"
-                        animate={{
-                            opacity: isHovered ? 0.7 : 1,
-                        }}
-                        transition={{ duration: 0.3 }}
-                        style={{
-                            color: 'var(--color-off-white-subtle)',
-                        }}
-                    >
+                    <p className="text-lg font-bold text-[var(--color-gray-500)] group-hover:text-[var(--color-jet-black)] transition-colors">
                         ${price}
-                    </motion.p>
+                    </p>
                 </div>
-
-                {/* Hover Underline */}
-                <motion.div
-                    style={{
-                        height: '1px',
-                        backgroundColor: 'var(--color-amber)',
-                        marginTop: 'var(--space-3)',
-                    }}
-                    initial={{ width: 0 }}
-                    animate={{ width: isHovered ? '100%' : 0 }}
-                    transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-                />
             </motion.div>
         </Link>
     );
