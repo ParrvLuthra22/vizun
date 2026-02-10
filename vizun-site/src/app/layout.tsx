@@ -6,7 +6,7 @@ import { SmoothScroll } from "@/components/ui/SmoothScroll";
 const oswald = Oswald({
   variable: "--font-oswald",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["200", "400", "500", "600", "700"],
   display: "swap",
 });
 
@@ -37,8 +37,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${oswald.variable} ${inter.variable}`}>
-        <SmoothScroll />
-        {children}
+        <SmoothScroll>
+          {children}
+        </SmoothScroll>
       </body>
     </html>
   );

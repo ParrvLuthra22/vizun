@@ -140,6 +140,40 @@ export const maskReveal = {
   }
 };
 
+// Impact Variant - Hard entry with scale
+export const impactVar = {
+  hidden: { opacity: 0, scale: 1.1, filter: 'blur(10px)' },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    filter: 'blur(0px)',
+    transition: {
+      duration: 0.4,
+      ease: easings.impact
+    }
+  }
+};
+
+// Tilt Enter - 3D rotation on load
+export const tiltEnter = {
+  hidden: {
+    opacity: 0,
+    scale: 1.2,
+    rotateX: 5,
+    y: 50
+  },
+  visible: {
+    opacity: 1,
+    scale: 1.1,
+    rotateX: 0,
+    y: 0,
+    transition: {
+      duration: 1.2,
+      ease: [0.16, 1, 0.3, 1] // Custom luxury ease
+    }
+  }
+};
+
 // Scale Animations
 export const scaleIn = {
   hidden: {

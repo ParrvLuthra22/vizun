@@ -4,6 +4,7 @@ import { ProductCard } from '@/components/ui/ProductCard';
 import { Button } from '@/components/ui/Button';
 import { motion } from 'framer-motion';
 import { slamUp, staggerContainer } from '@/lib/motion';
+import { Parallax } from '@/components/ui/Parallax';
 
 export const FeaturedDropSection = () => {
     const featuredProducts = [
@@ -72,16 +73,18 @@ export const FeaturedDropSection = () => {
                     className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-16"
                 >
                     {featuredProducts.map((product, index) => (
-                        <motion.div
+                        <Parallax
                             key={product.id}
-                            variants={slamUp}
+                            speed={index % 2 === 0 ? 0.05 : 0.15} // Center column moves faster
                             className={`
                                 ${index === 1 ? 'md:mt-32' : ''} 
                                 ${index === 2 ? 'md:mt-16' : ''}
                             `}
                         >
-                            <ProductCard {...product} />
-                        </motion.div>
+                            <motion.div variants={slamUp}>
+                                <ProductCard {...product} />
+                            </motion.div>
+                        </Parallax>
                     ))}
                 </motion.div>
 
