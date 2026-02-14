@@ -15,13 +15,15 @@ const navLinks = [
     { name: "ABOUT", href: "/about" },
 ];
 
+import { useCart } from "@/context/CartContext";
+
 export default function Header() {
     const { scrollY } = useScroll();
+    const { itemCount, toggleCart } = useCart();
     const [hidden, setHidden] = useState(false);
     const [scrolled, setScrolled] = useState(false);
     const [isSearchOpen, setIsSearchOpen] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-    const [cartCount, setCartCount] = useState(0); // Placeholder state
     const searchInputRef = useRef<HTMLInputElement>(null);
 
     // Scroll Behavior
@@ -67,7 +69,7 @@ export default function Header() {
                 animate={hidden ? "hidden" : "visible"}
                 transition={{ duration: 0.35, ease: "easeInOut" }}
                 className={cn(
-                    "fixed top-0 left-0 right-0 z-50 transition-all duration-500 border-b border-luxury-silver/10 backdrop-blur-[20px]",
+                    "fixed top-0 left-0 right-0 z-[40] transition-all duration-500 border-b border-luxury-silver/10 backdrop-blur-[20px]",
                     scrolled ? "h-16 bg-luxury-black/90 shadow-lg" : "h-[80px] bg-luxury-black/80"
                 )}
                 style={{
@@ -151,21 +153,21 @@ export default function Header() {
 
                             {/* Cart */}
                             <Magnetic>
-                                <Link href="/cart" className="relative text-luxury-silver hover:text-white transition-colors group block">
+                                <button onClick={toggleCart} className="relative text-luxury-silver hover:text-white transition-colors group block">
                                     <ShoppingBag className="w-5 h-5" />
                                     <AnimatePresence>
-                                        {cartCount >= 0 && (
+                                        {itemCount > 0 && (
                                             <motion.span
                                                 initial={{ scale: 0 }}
                                                 animate={{ scale: 1 }}
                                                 exit={{ scale: 0 }}
                                                 className="absolute -top-2 -right-2 flex h-4 w-4 items-center justify-center rounded-full bg-luxury-rose text-[10px] font-bold text-white shadow-sm"
                                             >
-                                                {cartCount}
+                                                {itemCount}
                                             </motion.span>
                                         )}
                                     </AnimatePresence>
-                                </Link>
+                                </button>
                             </Magnetic>
 
                             {/* User */}
