@@ -1,34 +1,17 @@
 import type { Metadata } from "next";
-import { Oswald, Inter } from "next/font/google";
+import { Inter, Playfair_Display } from "next/font/google";
 import "./globals.css";
-import { SmoothScroll } from "@/components/ui/SmoothScroll";
-import { Cursor } from "@/components/ui/Cursor";
 
-const oswald = Oswald({
-  variable: "--font-oswald",
-  subsets: ["latin"],
-  weight: ["200", "400", "500", "600", "700"],
-  display: "swap",
-});
-
-const inter = Inter({
-  variable: "--font-sans",
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700", "900"],
-  display: "swap",
-});
+const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
+const playfair = Playfair_Display({ subsets: ["latin"], variable: "--font-playfair" });
 
 export const metadata: Metadata = {
-  title: "VIZUN — Quiet Luxury for the Modern Man",
-  description: "Premium men's fashion. Limited drops. Quiet luxury meets modern streetwear.",
-  keywords: ["men's fashion", "luxury streetwear", "limited edition", "premium clothing"],
-  authors: [{ name: "VIZUN" }],
-  openGraph: {
-    title: "VIZUN — Quiet Luxury for the Modern Man",
-    description: "Premium men's fashion. Limited drops. Quiet luxury meets modern streetwear.",
-    type: "website",
-  },
+  title: "Vizun | Premium Men's Fashion",
+  description: "Redefine your style with Vizun's exclusive collection.",
 };
+
+import Header from "@/components/layout/Header";
+import Footer from "@/components/layout/Footer";
 
 export default function RootLayout({
   children,
@@ -36,11 +19,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={`${oswald.variable} ${inter.variable}`}>
-        <SmoothScroll>
-          {children}
-        </SmoothScroll>
+    <html lang="en" className={`${inter.variable} ${playfair.variable}`}>
+      <body className="font-sans antialiased bg-luxury-white text-luxury-black flex flex-col min-h-screen">
+        <Header />
+        <main className="flex-grow">{children}</main>
+        <Footer />
       </body>
     </html>
   );

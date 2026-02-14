@@ -1,75 +1,69 @@
-import Link from 'next/link';
+import React from "react";
+import Link from "next/link";
+import Container from "../ui/Container";
 
-export const Footer = () => {
+export default function Footer() {
     return (
-        <footer className="section section-secondary border-top">
-            <div className="container">
-                <div className="grid grid-cols-2 md:grid-cols-12 gap-8 mb-12">
-                    {/* Shop - 2 Cols */}
-                    <div className="col-span-1 md:col-span-2">
-                        <p className="label-base mb-4">SHOP</p>
-                        <nav className="flex flex-col gap-3">
-                            <Link href="/shop" className="body-sm hover:text-[var(--color-alert-red)] transition-colors">All Products</Link>
-                            <Link href="/shop?filter=new" className="body-sm hover:text-[var(--color-alert-red)] transition-colors">New Drops</Link>
-                            <Link href="/shop?filter=archive" className="body-sm hover:text-[var(--color-alert-red)] transition-colors">Archive</Link>
-                        </nav>
+        <footer className="bg-luxury-black text-luxury-white pt-16 pb-8 border-t border-zinc-800">
+            <Container>
+                <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+                    <div className="space-y-4">
+                        <h3 className="text-2xl font-serif font-bold tracking-widest">VIZUN</h3>
+                        <p className="text-gray-400 text-sm max-w-xs">
+                            Redefining premium menswear for the modern gentleman. Minimalism meets luxury.
+                        </p>
                     </div>
 
-                    {/* Brand - 2 Cols */}
-                    <div className="col-span-1 md:col-span-2">
-                        <p className="label-base mb-4">BRAND</p>
-                        <nav className="flex flex-col gap-3">
-                            <Link href="/brand" className="body-sm hover:text-[var(--color-alert-red)] transition-colors">Philosophy</Link>
-                            <Link href="/brand#story" className="body-sm hover:text-[var(--color-alert-red)] transition-colors">Story</Link>
-                            <Link href="/brand#craftsmanship" className="body-sm hover:text-[var(--color-alert-red)] transition-colors">Craftsmanship</Link>
-                        </nav>
+                    <div>
+                        <h4 className="font-bold mb-6 text-sm tracking-wider uppercase">Shop</h4>
+                        <ul className="space-y-4 text-gray-400 text-sm">
+                            <li><Link href="/new-arrivals" className="hover:text-white transition">New Arrivals</Link></li>
+                            <li><Link href="/clothing" className="hover:text-white transition">Clothing</Link></li>
+                            <li><Link href="/accessories" className="hover:text-white transition">Accessories</Link></li>
+                            <li><Link href="/collections" className="hover:text-white transition">Collections</Link></li>
+                        </ul>
                     </div>
 
-                    {/* Support - 2 Cols */}
-                    <div className="col-span-1 md:col-span-2">
-                        <p className="label-base mb-4">SUPPORT</p>
-                        <nav className="flex flex-col gap-3">
-                            <Link href="/contact" className="body-sm hover:text-[var(--color-alert-red)] transition-colors">Contact</Link>
-                            <Link href="/shipping" className="body-sm hover:text-[var(--color-alert-red)] transition-colors">Shipping</Link>
-                            <Link href="/returns" className="body-sm hover:text-[var(--color-alert-red)] transition-colors">Returns</Link>
-                            <Link href="/size-guide" className="body-sm hover:text-[var(--color-alert-red)] transition-colors">Size Guide</Link>
-                        </nav>
+                    <div>
+                        <h4 className="font-bold mb-6 text-sm tracking-wider uppercase">Support</h4>
+                        <ul className="space-y-4 text-gray-400 text-sm">
+                            <li><Link href="/faq" className="hover:text-white transition">FAQ</Link></li>
+                            <li><Link href="/shipping" className="hover:text-white transition">Shipping & Returns</Link></li>
+                            <li><Link href="/contact" className="hover:text-white transition">Contact Us</Link></li>
+                            <li><Link href="/privacy" className="hover:text-white transition">Privacy Policy</Link></li>
+                        </ul>
                     </div>
 
-                    {/* Legal - 2 Cols */}
-                    <div className="col-span-1 md:col-span-2">
-                        <p className="label-base mb-4">LEGAL</p>
-                        <nav className="flex flex-col gap-3">
-                            <Link href="/privacy" className="body-sm hover:text-[var(--color-alert-red)] transition-colors">Privacy</Link>
-                            <Link href="/terms" className="body-sm hover:text-[var(--color-alert-red)] transition-colors">Terms</Link>
-                        </nav>
-                    </div>
-
-                    {/* Connect - 4 Cols (Larger) */}
-                    <div className="col-span-2 md:col-span-4 md:text-right">
-                        <p className="label-base mb-4">CONNECT</p>
-                        <nav className="flex flex-col gap-3 md:items-end">
-                            <a href="https://instagram.com/vizun" target="_blank" rel="noopener noreferrer" className="body-sm hover:text-[var(--color-alert-red)] transition-colors">
-                                Instagram
-                            </a>
-                            <a href="mailto:hello@vizun.com" className="body-sm hover:text-[var(--color-alert-red)] transition-colors">Email</a>
-                        </nav>
+                    <div>
+                        <h4 className="font-bold mb-6 text-sm tracking-wider uppercase">Newsletter</h4>
+                        <p className="text-gray-400 text-sm mb-4">
+                            Subscribe to receive updates, access to exclusive deals, and more.
+                        </p>
+                        <form className="flex flex-col gap-2">
+                            <input
+                                type="email"
+                                placeholder="Enter your email"
+                                className="bg-transparent border border-zinc-700 px-4 py-3 text-sm focus:outline-none focus:border-white transition"
+                            />
+                            <button
+                                type="submit"
+                                className="bg-white text-black px-4 py-3 text-sm font-bold uppercase hover:bg-gray-200 transition"
+                            >
+                                Subscribe
+                            </button>
+                        </form>
                     </div>
                 </div>
 
-                <hr className="divider" />
-
-                <div style={{
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    alignItems: 'center',
-                    flexWrap: 'wrap',
-                    gap: 'var(--space-4)',
-                }}>
-                    <p className="body-xs">© 2026 VIZUN. All rights reserved.</p>
-                    <p className="body-xs">Quiet luxury for the modern man</p>
+                <div className="pt-8 border-t border-zinc-900 flex flex-col md:flex-row justify-between items-center text-xs text-gray-500">
+                    <p>&copy; {new Date().getFullYear()} Vizun. All rights reserved.</p>
+                    <div className="flex space-x-6 mt-4 md:mt-0">
+                        <Link href="#" className="hover:text-white transition">Instagram</Link>
+                        <Link href="#" className="hover:text-white transition">Twitter</Link>
+                        <Link href="#" className="hover:text-white transition">Facebook</Link>
+                    </div>
                 </div>
-            </div>
+            </Container>
         </footer>
     );
-};
+}

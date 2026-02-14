@@ -1,205 +1,166 @@
-'use client';
+"use client";
 
-import Link from 'next/link';
-import Image from 'next/image';
-import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { durations, easings } from '@/lib/motion';
-import { Magnetic } from '@/components/ui/Magnetic';
-import { Cursor } from '@/components/ui/Cursor';
+import React, { useState, useEffect } from "react";
+import Link from "next/link";
+import { motion, useScroll, useMotionValueEvent } from "framer-motion";
+import Container from "../ui/Container";
 
-export const Header = () => {
-    const [menuOpen, setMenuOpen] = useState(false);
-    const [hoveredLink, setHoveredLink] = useState<string | null>(null);
+// Placeholder icons (replace with Lucide or preferred icon set later)
+const ShoppingBagIcon = ({ className }: { className?: string }) => (
+    <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        className={className}
+    >
+        <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
+        <line x1="3" y1="6" x2="21" y2="6" />
+        <path d="M16 10a4 4 0 0 1-8 0" />
+    </svg>
+);
 
-    const mainLinks = [
-        { name: 'SHOP', href: '/shop', image: '/products/coat.jpg' }, // Placeholder image
-        { name: 'BRAND', href: '/brand', image: '/products/tee.jpg' },
-        { name: 'COLLECTIONS', href: '/collections', image: '/products/trousers.jpg' },
-        { name: 'ARCHIVE', href: '/archive', image: '/products/coat.jpg' },
-    ];
+const UserIcon = ({ className }: { className?: string }) => (
+    <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        className={className}
+    >
+        <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
+        <circle cx="12" cy="7" r="4" />
+    </svg>
+);
 
-    const secondaryLinks = [
-        { name: 'ACCOUNT', href: '/account' },
-        { name: 'SEARCH', href: '/search' },
-        { name: 'LEGAL', href: '/legal' },
-    ];
+const SearchIcon = ({ className }: { className?: string }) => (
+    <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        className={className}
+    >
+        <circle cx="11" cy="11" r="8" />
+        <path d="m21 21-4.3-4.3" />
+    </svg>
+);
 
-    const socialLinks = [
-        { name: 'INSTAGRAM', href: '#' },
-        { name: 'TWITTER', href: '#' },
-        { name: 'LINKEDIN', href: '#' },
-    ];
+const navLinks = [
+    { name: "New Arrivals", href: "/new-arrivals" },
+    { name: "Clothing", href: "/clothing" },
+    { name: "Accessories", href: "/accessories" },
+    { name: "Collections", href: "/collections" },
+    { name: "Editorial", href: "/editorial" },
+];
+
+export default function Header() {
+    const { scrollY } = useScroll();
+    const [hidden, setHidden] = useState(false);
+    const [scrolled, setScrolled] = useState(false);
+
+    useMotionValueEvent(scrollY, "change", (latest) => {
+        const previous = scrollY.getPrevious() ?? 0;
+        if (latest > previous && latest > 150) {
+            setHidden(true);
+        } else {
+            setHidden(false);
+        }
+
+        if (latest > 50) {
+            setScrolled(true);
+        } else {
+            setScrolled(false);
+        }
+    });
 
     return (
-        <>
-            <motion.header
-                initial={{ y: -100 }}
-                animate={{ y: 0 }}
-                transition={{ duration: durations.slow, ease: easings.aggressive }}
-                className="fixed top-0 left-0 right-0 z-[var(--z-sticky)] mix-blend-exclusion text-white p-6 md:p-8 flex justify-between items-start pointer-events-none"
-            >
-                {/* Logo - Anchored Top Left */}
-                <Link href="/" className="pointer-events-auto">
-                    <Magnetic>
-                        <span className="font-serif font-bold text-4xl md:text-5xl leading-none tracking-tighter hover:opacity-50 transition-opacity block cursor-hover relative z-50">
-                            VIZUN
-                        </span>
-                    </Magnetic>
-                </Link>
+        <motion.header
+            variants={{
+                visible: { y: 0 },
+                hidden: { y: "-100%" },
+            }}
+            animate={hidden ? "hidden" : "visible"}
+            transition={{ duration: 0.35, ease: "easeInOut" }}
+            className={`fixed top-0 left-0 right-0 z-50 transition-colors duration-300 ${scrolled ? "bg-luxury-white/90 backdrop-blur-md border-b border-gray-100" : "bg-transparent text-white"
+                }`}
+        >
+            <Container>
+                <div className="flex items-center justify-between h-20">
+                    {/* Mobile Menu Button (Placeholder) */}
+                    <div className="md:hidden">
+                        <button className="p-2">
+                            <span className="sr-only">Menu</span>
+                            <svg
+                                className="w-6 h-6"
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24"
+                            >
+                                <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    strokeWidth={2}
+                                    d="M4 6h16M4 12h16M4 18h16"
+                                />
+                            </svg>
+                        </button>
+                    </div>
 
-                {/* Right Anchored Controls */}
-                <div className="flex gap-8 pointer-events-auto items-center relative z-50">
-                    <Magnetic>
-                        <Link href="/cart" className="font-bold text-sm tracking-widest relative group cursor-hover overflow-hidden block">
-                            <span className="block group-hover:-translate-y-full transition-transform duration-300 ease-in-out">
-                                CART (0)
-                            </span>
-                            <span className="absolute top-full left-0 block group-hover:-translate-y-full transition-transform duration-300 ease-in-out text-[var(--color-alert-red)]">
-                                CART (0)
+                    {/* Navigation Links */}
+                    <nav className="hidden md:flex items-center space-x-8">
+                        {navLinks.map((link) => (
+                            <Link
+                                key={link.name}
+                                href={link.href}
+                                className={`text-sm font-medium tracking-wide transition-colors ${scrolled ? "text-luxury-black hover:text-luxury-gray" : "text-white/90 hover:text-white"
+                                    }`}
+                            >
+                                {link.name}
+                            </Link>
+                        ))}
+                    </nav>
+
+                    {/* Logo */}
+                    <div className="absolute left-1/2 transform -translate-x-1/2">
+                        <Link href="/" className="flex items-center">
+                            <span className={`text-2xl font-serif font-bold tracking-widest ${scrolled ? "text-luxury-black" : "text-white"
+                                }`}>VIZUN</span>
+                        </Link>
+                    </div>
+
+                    {/* Icons */}
+                    <div className="flex items-center space-x-4">
+                        <button className={`p-2 transition-colors ${scrolled ? "text-luxury-black hover:text-luxury-gray" : "text-white/90 hover:text-white"}`}>
+                            <SearchIcon className="w-5 h-5" />
+                        </button>
+                        <Link href="/account" className={`p-2 transition-colors ${scrolled ? "text-luxury-black hover:text-luxury-gray" : "text-white/90 hover:text-white"}`}>
+                            <UserIcon className="w-5 h-5" />
+                        </Link>
+                        <Link href="/cart" className={`p-2 transition-colors relative ${scrolled ? "text-luxury-black hover:text-luxury-gray" : "text-white/90 hover:text-white"}`}>
+                            <ShoppingBagIcon className="w-5 h-5" />
+                            <span className="absolute top-1 right-0 flex h-4 w-4 items-center justify-center rounded-full bg-luxury-accent text-[10px] font-bold text-white">
+                                0
                             </span>
                         </Link>
-                    </Magnetic>
-
-                    <Magnetic>
-                        <button
-                            onClick={() => setMenuOpen(!menuOpen)}
-                            className="font-bold text-sm tracking-widest cursor-hover overflow-hidden block relative group"
-                        >
-                            <span className="block group-hover:-translate-y-full transition-transform duration-300 ease-in-out">
-                                {menuOpen ? 'CLOSE' : 'MENU'}
-                            </span>
-                            <span className="absolute top-full left-0 block group-hover:-translate-y-full transition-transform duration-300 ease-in-out text-[var(--color-alert-red)]">
-                                {menuOpen ? 'CLOSE' : 'MENU'}
-                            </span>
-                        </button>
-                    </Magnetic>
+                    </div>
                 </div>
-            </motion.header>
-
-            {/* Full Screen Menu Overlay */}
-            <AnimatePresence>
-                {menuOpen && (
-                    <motion.div
-                        initial={{ clipPath: 'inset(100% 0 0 0)' }}
-                        animate={{ clipPath: 'inset(0 0 0 0)' }}
-                        exit={{ clipPath: 'inset(0 0 100% 0)' }}
-                        transition={{ duration: 0.8, ease: [0.76, 0, 0.24, 1] }} // Custom erratic ease
-                        className="fixed inset-0 bg-[var(--color-jet-black)] z-[var(--z-modal)] flex flex-col md:flex-row pointer-events-auto overflow-hidden"
-                    >
-                        {/* Background Image Reveal Layer */}
-                        <div className="absolute inset-0 z-0 opacity-20 md:opacity-40">
-                            <AnimatePresence mode="wait">
-                                {hoveredLink && (
-                                    <motion.div
-                                        key={hoveredLink}
-                                        initial={{ opacity: 0, scale: 1.1 }}
-                                        animate={{ opacity: 1, scale: 1 }}
-                                        exit={{ opacity: 0 }}
-                                        transition={{ duration: 0.4 }}
-                                        className="absolute inset-0"
-                                    >
-                                        <Image
-                                            src={mainLinks.find(l => l.name === hoveredLink)?.image || ''}
-                                            alt="Menu Background"
-                                            fill
-                                            className="object-cover grayscale"
-                                            priority
-                                        />
-                                    </motion.div>
-                                )}
-                            </AnimatePresence>
-                            <div className="absolute inset-0 bg-[var(--color-jet-black)] mix-blend-color" />
-                        </div>
-
-                        {/* Navigation Content */}
-                        <div className="container relative z-10 h-full flex flex-col justify-end pb-12 md:pb-24 pt-32">
-
-                            <div className="grid grid-cols-1 md:grid-cols-12 gap-8 h-full">
-                                {/* Main Links - Giant Type */}
-                                <div className="col-span-1 md:col-span-8 flex flex-col justify-center gap-0 md:gap-4">
-                                    {mainLinks.map((link, index) => (
-                                        <motion.div
-                                            key={link.name}
-                                            initial={{ y: 100, opacity: 0 }}
-                                            animate={{ y: 0, opacity: 1 }}
-                                            exit={{ y: 100, opacity: 0 }}
-                                            transition={{ delay: 0.1 * index, duration: 0.8, ease: easings.aggressive }}
-                                            className="overflow-hidden"
-                                        >
-                                            <Link
-                                                href={link.href}
-                                                onMouseEnter={() => setHoveredLink(link.name)}
-                                                onMouseLeave={() => setHoveredLink(null)}
-                                                onClick={() => setMenuOpen(false)}
-                                                className={`
-                                                    block text-[12vw] md:text-[10vw] leading-[0.85] font-bold font-serif tracking-tighter transition-colors duration-300 cursor-hover
-                                                    ${hoveredLink && hoveredLink !== link.name ? 'text-[var(--color-gray-800)]' : 'text-[var(--color-off-white)]'}
-                                                    hover:text-transparent hover:text-stroke hover:text-stroke-white
-                                                `}
-                                                style={{ WebkitTextStroke: hoveredLink === link.name ? '1px white' : '0px transparent' }}
-                                            >
-                                                {link.name}
-                                            </Link>
-                                        </motion.div>
-                                    ))}
-                                </div>
-
-                                {/* Secondary Links & Info */}
-                                <div className="col-span-1 md:col-span-4 flex flex-col justify-end gap-12 md:pl-12 text-[var(--color-off-white)]">
-                                    <div className="flex flex-col gap-4">
-                                        {secondaryLinks.map((link, index) => (
-                                            <motion.div
-                                                key={link.name}
-                                                initial={{ opacity: 0, x: 20 }}
-                                                animate={{ opacity: 1, x: 0 }}
-                                                exit={{ opacity: 0, x: 20 }}
-                                                transition={{ delay: 0.4 + (0.1 * index) }}
-                                            >
-                                                <Link
-                                                    href={link.href}
-                                                    className="text-lg font-bold tracking-widest hover:text-[var(--color-alert-red)] transition-colors cursor-hover"
-                                                    onClick={() => setMenuOpen(false)}
-                                                >
-                                                    {link.name}
-                                                </Link>
-                                            </motion.div>
-                                        ))}
-                                    </div>
-
-                                    <div className="flex gap-8">
-                                        {socialLinks.map((link, index) => (
-                                            <motion.div
-                                                key={link.name}
-                                                initial={{ opacity: 0 }}
-                                                animate={{ opacity: 1 }}
-                                                exit={{ opacity: 0 }}
-                                                transition={{ delay: 0.6 + (0.1 * index) }}
-                                            >
-                                                <a href={link.href} className="text-xs font-bold uppercase tracking-widest opacity-50 hover:opacity-100 transition-opacity cursor-hover">
-                                                    {link.name}
-                                                </a>
-                                            </motion.div>
-                                        ))}
-                                    </div>
-
-                                    <motion.div
-                                        initial={{ opacity: 0 }}
-                                        animate={{ opacity: 1 }}
-                                        exit={{ opacity: 0 }}
-                                        transition={{ delay: 0.8 }}
-                                    >
-                                        <p className="text-xs font-mono uppercase opacity-30">
-                                            VIZUN STUDIOS © 2026 <br />
-                                            EST. NEW YORK
-                                        </p>
-                                    </motion.div>
-                                </div>
-                            </div>
-                        </div>
-                    </motion.div>
-                )}
-            </AnimatePresence>
-        </>
+            </Container>
+        </motion.header>
     );
-};
+}
