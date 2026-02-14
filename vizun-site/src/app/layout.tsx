@@ -1,17 +1,17 @@
 import type { Metadata } from "next";
-import { Inter, Playfair_Display } from "next/font/google";
+import { Inter, Space_Grotesk, Orbitron } from "next/font/google";
 import "./globals.css";
-
-const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
-const playfair = Playfair_Display({ subsets: ["latin"], variable: "--font-playfair" });
-
-export const metadata: Metadata = {
-  title: "Vizun | Premium Men's Fashion",
-  description: "Redefine your style with Vizun's exclusive collection.",
-};
-
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
+
+const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
+const spaceGrotesk = Space_Grotesk({ subsets: ["latin"], variable: "--font-space-grotesk" });
+const orbitron = Orbitron({ subsets: ["latin"], variable: "--font-orbitron" });
+
+export const metadata: Metadata = {
+  title: "Vizun | Futuristic Streetwear Luxury",
+  description: "Redefine your reality. Exclusive futuristic fashion for the vanguard.",
+};
 
 export default function RootLayout({
   children,
@@ -19,10 +19,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${inter.variable} ${playfair.variable}`}>
-      <body className="font-sans antialiased bg-luxury-white text-luxury-black flex flex-col min-h-screen">
+    <html lang="en" className={`${inter.variable} ${spaceGrotesk.variable} ${orbitron.variable}`}>
+      <body className="font-sans antialiased bg-luxury-black text-luxury-white flex flex-col min-h-screen selection:bg-luxury-gold selection:text-black">
         <Header />
-        <main className="flex-grow">{children}</main>
+        <main className="flex-grow relative z-10">{children}</main>
         <Footer />
       </body>
     </html>

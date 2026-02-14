@@ -4,17 +4,19 @@
 @theme {
   --font-sans: var(--font-inter);
   --font-serif: var(--font-playfair);
+  --font-heading: var(--font-space-grotesk);
+  --font-tech: var(--font-orbitron);
 }
 
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 255, 255, 255;
-  --background-end-rgb: 255, 255, 255;
+  --foreground-rgb: 255, 255, 255;
+  --background-start-rgb: 10, 10, 10;
+  --background-end-rgb: 10, 10, 10;
 }
 
 @layer base {
   body {
-    @apply bg-luxury-white text-luxury-black antialiased;
+    @apply bg-luxury-black text-luxury-white antialiased;
   }
 
   h1,
@@ -23,7 +25,7 @@
   h4,
   h5,
   h6 {
-    @apply font-serif;
+    @apply font-heading tracking-tight;
   }
 }
 
@@ -31,6 +33,31 @@
   .text-balance {
     text-wrap: balance;
   }
+
+  .glass-panel {
+    @apply bg-luxury-charcoal/40 backdrop-blur-md border border-white/10;
+  }
+
+  .neon-text-gold {
+    text-shadow: 0 0 10px rgba(212, 175, 55, 0.5), 0 0 20px rgba(212, 175, 55, 0.3);
+  }
+
+  .neon-border-gold {
+    box-shadow: 0 0 5px rgba(212, 175, 55, 0.5);
+  }
+}
+
+/* Custom Scrollbar for Chrome/Safari/Edge */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-luxury-black;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-zinc-800 rounded-full hover:bg-luxury-gold transition-colors;
 }
 
 /* Smooth Scrolling */
