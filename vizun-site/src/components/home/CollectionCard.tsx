@@ -2,6 +2,7 @@
 
 import React, { useRef, useState } from "react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -14,6 +15,7 @@ interface CollectionCardProps {
 }
 
 export default function CollectionCard({ name, itemCount, image }: CollectionCardProps) {
+    const router = useRouter();
     const ref = useRef<HTMLDivElement>(null);
     const [hovered, setHovered] = useState(false);
 
@@ -53,6 +55,7 @@ export default function CollectionCard({ name, itemCount, image }: CollectionCar
     return (
         <motion.div
             ref={ref}
+            onClick={() => router.push("/shop")}
             onMouseMove={handleMouseMove}
             onMouseEnter={() => setHovered(true)}
             onMouseLeave={handleMouseLeave}

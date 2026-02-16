@@ -87,7 +87,7 @@ export default function Header() {
                                 transition={{ duration: 0.5 }}
                                 className="font-heading font-bold text-2xl tracking-[-0.02em] text-luxury-gold drop-shadow-[0_0_8px_rgba(212,175,55,0.3)]"
                             >
-                                FUTUREFIT
+                                VIZUN
                                 <span className="absolute -top-1 -right-2 w-2 h-2 rounded-full bg-luxury-gold animate-ping opacity-75" />
                             </motion.span>
                         </Link>

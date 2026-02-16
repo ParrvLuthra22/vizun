@@ -182,7 +182,7 @@ export default function Footer() {
             {/* Bottom Bar */}
             <div className="bg-[#1C1C1C] border-t border-white/10 py-6 px-4">
                 <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-access-silver">
-                    <p>© 2025 FutureFit. All rights reserved.</p>
+                    <p>&copy; 2026 VIZUN. All rights reserved.</p>
 
                     <div className="flex items-center gap-2 border border-white/10 rounded px-3 py-1 cursor-pointer hover:bg-white/5">
                         <Globe className="w-3 h-3" />
@@ -190,7 +190,7 @@ export default function Footer() {
                     </div>
 
                     <p className="flex items-center gap-1 group">
-                        Made with <Heart className="w-3 h-3 text-red-500 fill-red-500 group-hover:animate-ping" /> in India
+                        made by Parrv
                     </p>
                 </div>
             </div>

@@ -40,7 +40,8 @@ export default function ProductInfo({ name, price, originalPrice, rating, review
                 price,
                 image: "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?q=80&w=2836&auto=format&fit=crop", // hardcoded for demo
                 size: selectedSize,
-                color: "Black"
+                color: "Black",
+                quantity: quantity
             });
             setIsAdding(false);
             setIsAdded(true);

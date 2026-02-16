@@ -17,7 +17,7 @@ interface CartContextType {
     isOpen: boolean;
     total: number;
     itemCount: number;
-    addToCart: (item: Omit<CartItem, "quantity">) => void;
+    addToCart: (item: Omit<CartItem, "quantity"> & { quantity?: number }) => void;
     removeFromCart: (fastId: string) => void; // fastId is composite of id+size
     updateQuantity: (fastId: string, quantity: number) => void;
     toggleCart: () => void;
@@ -52,7 +52,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
         }
     }, [items, isMounted]);
 
-    const addToCart = (newItem: Omit<CartItem, "quantity">) => {
+    const addToCart = (newItem: Omit<CartItem, "quantity"> & { quantity?: number }) => {
         setItems((prev) => {
             const fastId = `${newItem.id}-${newItem.size}`;
             const existing = prev.find((item) => `${item.id}-${item.size}` === fastId);
@@ -60,11 +60,11 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
             if (existing) {
                 return prev.map((item) =>
                     `${item.id}-${item.size}` === fastId
-                        ? { ...item, quantity: item.quantity + 1 }
+                        ? { ...item, quantity: item.quantity + (newItem.quantity || 1) }
                         : item
                 );
             }
-            return [...prev, { ...newItem, quantity: 1 }];
+            return [...prev, { ...newItem, quantity: newItem.quantity || 1 }];
         });
         setIsOpen(true);
     };

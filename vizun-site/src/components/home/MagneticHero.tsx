@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import React, { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ArrowRight, Play } from "lucide-react";
@@ -239,16 +240,22 @@ export default function MagneticHero() {
 
                 {/* Buttons */}
                 <div ref={buttonsRef} className="flex flex-col sm:flex-row gap-6 w-full sm:w-auto">
-                    <button className="group relative px-8 py-4 bg-linear-to-r from-luxury-gold to-[#F5D061] text-black font-bold tracking-wider clip-path-slant hover:scale-105 transition-transform duration-300">
+                    <Link
+                        href="/shop"
+                        className="group relative px-8 py-4 bg-linear-to-r from-luxury-gold to-[#F5D061] text-black font-bold tracking-wider overflow-hidden hover:scale-105 transition-transform duration-300 flex items-center justify-center gap-2"
+                    >
                         <span className="relative z-10 flex items-center justify-center gap-2">
                             SHOP NOW <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
                         </span>
                         <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out" />
-                    </button>
+                    </Link>
 
-                    <button className="group px-8 py-4 bg-transparent border border-white/30 text-white font-bold tracking-wider hover:bg-white/5 hover:border-white transition-all duration-300 flex items-center justify-center gap-2">
+                    <Link
+                        href="/shop"
+                        className="group px-8 py-4 bg-transparent border border-white/30 text-white font-bold tracking-wider hover:bg-white/5 hover:border-white transition-all duration-300 flex items-center justify-center gap-2"
+                    >
                         <Play className="w-4 h-4 fill-white" /> VIEW LOOKBOOK
-                    </button>
+                    </Link>
                 </div>
             </div>
 

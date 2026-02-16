@@ -59,13 +59,13 @@ export default function FeaturedDrops() {
     }, []);
 
     return (
-        <section className="relative h-[90vh] w-full bg-gradient-to-b from-black to-[#1C1C1C] overflow-hidden flex flex-col justify-center">
+        <section className="relative h-[90vh] w-full bg-gradient-to-b from-black to-[#1C1C1C] overflow-hidden flex flex-col">
 
             {/* Liquid Background */}
             <LiquidBackground />
 
-            {/* Floating Headline */}
-            <div className="absolute top-12 left-8 md:top-20 md:left-20 z-10 pointer-events-none">
+            {/* Headline */}
+            <div className="w-full px-8 md:px-20 pt-12 md:pt-20 z-10 pointer-events-none">
                 <motion.h2
                     style={{ x }}
                     className="font-bebas text-6xl md:text-8xl text-white drop-shadow-[0_0_15px_rgba(212,175,55,0.3)] tracking-wide"
@@ -80,7 +80,7 @@ export default function FeaturedDrops() {
             {/* Horizontal Scroll Container */}
             <div
                 ref={containerRef}
-                className="w-full overflow-x-auto flex gap-6 md:gap-10 px-8 md:px-20 py-10 pb-20 snap-x snap-mandatory scrollbar-hide z-20 items-center"
+                className="flex-1 w-full overflow-x-auto flex gap-6 md:gap-10 px-8 md:px-20 pb-10 items-center snap-x snap-mandatory scrollbar-hide z-20"
                 style={{ scrollBehavior: 'smooth' }}
             >
                 {collections.map((collection, index) => (
