@@ -50,7 +50,7 @@ export default function Hero() {
                     className="flex flex-col sm:flex-row gap-4 justify-center"
                 >
                     <Link href="/collections">
-                        <Button variant="secondary" size="lg">Explore Collection</Button>
+                        <Button variant="primary" size="lg">Explore Collection</Button>
                     </Link>
                     <Link href="/new-arrivals">
                         <Button variant="outline" size="lg" className="border-white text-white hover:bg-white hover:text-black">
