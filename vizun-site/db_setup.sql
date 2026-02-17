@@ -248,37 +248,50 @@ CREATE INDEX idx_notifications_read ON public.notifications(user_id, is_read);
 
 -- 4. Enable RLS and Create Policies
 
+-- Allow public read access to products
 ALTER TABLE public.products ENABLE ROW LEVEL SECURITY;
-CREATE POLICY "Public Read Products" ON public.products FOR SELECT USING (true);
+CREATE POLICY "Anyone can view active products" ON public.products FOR SELECT USING (is_active = TRUE);
 
+-- Allow public read access to variants
 ALTER TABLE public.product_variants ENABLE ROW LEVEL SECURITY;
-CREATE POLICY "Public Read Variants" ON public.product_variants FOR SELECT USING (true);
+CREATE POLICY "Anyone can view product variants" ON public.product_variants FOR SELECT USING (TRUE);
 
+-- Allow public read access to images
 ALTER TABLE public.product_images ENABLE ROW LEVEL SECURITY;
-CREATE POLICY "Public Read Images" ON public.product_images FOR SELECT USING (true);
+CREATE POLICY "Anyone can view product images" ON public.product_images FOR SELECT USING (TRUE);
 
+-- Allow public read access to reviewed content
 ALTER TABLE public.reviews ENABLE ROW LEVEL SECURITY;
-CREATE POLICY "Public Read Reviews" ON public.reviews FOR SELECT USING (true);
+CREATE POLICY "Anyone can view approved reviews" ON public.reviews FOR SELECT USING (is_approved = TRUE);
+CREATE POLICY "Users can create reviews" ON public.reviews FOR INSERT WITH CHECK (auth.uid() = user_id);
+CREATE POLICY "Users can update own reviews" ON public.reviews FOR UPDATE USING (auth.uid() = user_id);
+CREATE POLICY "Users can delete own reviews" ON public.reviews FOR DELETE USING (auth.uid() = user_id);
 
+ALTER TABLE public.review_images ENABLE ROW LEVEL SECURITY;
+CREATE POLICY "Anyone can view review images" ON public.review_images FOR SELECT USING (TRUE);
+
+-- Allow users to see their own profile
 ALTER TABLE public.profiles ENABLE ROW LEVEL SECURITY;
-CREATE POLICY "Public profiles are viewable by everyone" ON public.profiles FOR SELECT USING (true);
-CREATE POLICY "Users can insert their own profile" ON public.profiles FOR INSERT WITH CHECK (auth.uid() = id);
+CREATE POLICY "Users can view own profile" ON public.profiles FOR SELECT USING (auth.uid() = id);
 CREATE POLICY "Users can update own profile" ON public.profiles FOR UPDATE USING (auth.uid() = id);
 
+-- Allow users to manage their own cart
 ALTER TABLE public.cart_items ENABLE ROW LEVEL SECURITY;
 CREATE POLICY "Users can view own cart" ON public.cart_items FOR SELECT USING (auth.uid() = user_id);
-CREATE POLICY "Users can insert into own cart" ON public.cart_items FOR INSERT WITH CHECK (auth.uid() = user_id);
+CREATE POLICY "Users can insert to own cart" ON public.cart_items FOR INSERT WITH CHECK (auth.uid() = user_id);
 CREATE POLICY "Users can update own cart" ON public.cart_items FOR UPDATE USING (auth.uid() = user_id);
 CREATE POLICY "Users can delete from own cart" ON public.cart_items FOR DELETE USING (auth.uid() = user_id);
 
+-- Allow users to manage their own wishlist
 ALTER TABLE public.wishlist_items ENABLE ROW LEVEL SECURITY;
 CREATE POLICY "Users can view own wishlist" ON public.wishlist_items FOR SELECT USING (auth.uid() = user_id);
-CREATE POLICY "Users can insert into own wishlist" ON public.wishlist_items FOR INSERT WITH CHECK (auth.uid() = user_id);
+CREATE POLICY "Users can insert to own wishlist" ON public.wishlist_items FOR INSERT WITH CHECK (auth.uid() = user_id);
 CREATE POLICY "Users can delete from own wishlist" ON public.wishlist_items FOR DELETE USING (auth.uid() = user_id);
 
+-- Allow users to view their own orders
 ALTER TABLE public.orders ENABLE ROW LEVEL SECURITY;
 CREATE POLICY "Users can view own orders" ON public.orders FOR SELECT USING (auth.uid() = user_id);
-CREATE POLICY "Users can insert own orders" ON public.orders FOR INSERT WITH CHECK (auth.uid() = user_id);
+CREATE POLICY "Users can create orders" ON public.orders FOR INSERT WITH CHECK (auth.uid() = user_id);
 
 ALTER TABLE public.order_items ENABLE ROW LEVEL SECURITY;
 CREATE POLICY "Users can view own order items" ON public.order_items FOR SELECT USING (
@@ -374,5 +387,68 @@ VALUES
 INSERT INTO public.product_images (product_id, image_url, display_order)
 VALUES
   ('c5f94000-06a1-61ae-d2a0-7a820b32c003', 'https://images.unsplash.com/photo-1578932750294-f5075e85f44a?q=80&w=2836&auto=format&fit=crop', 0);
+
+
+-- 6. Storage Policies
+
+-- Drop existing storage policies to avoid conflicts
+DROP POLICY IF EXISTS "Public can view product images" ON storage.objects;
+DROP POLICY IF EXISTS "Authenticated can upload product images" ON storage.objects;
+DROP POLICY IF EXISTS "Public can view review images" ON storage.objects;
+DROP POLICY IF EXISTS "Users can upload review images" ON storage.objects;
+DROP POLICY IF EXISTS "Users can delete own review images" ON storage.objects;
+DROP POLICY IF EXISTS "Public can view avatars" ON storage.objects;
+DROP POLICY IF EXISTS "Users can upload own avatar" ON storage.objects;
+DROP POLICY IF EXISTS "Users can update own avatar" ON storage.objects;
+
+-- PRODUCT IMAGES BUCKET
+CREATE POLICY "Public can view product images"
+  ON storage.objects FOR SELECT
+  USING (bucket_id = 'product-images');
+
+CREATE POLICY "Authenticated can upload product images"
+  ON storage.objects FOR INSERT
+  WITH CHECK (
+    bucket_id = 'product-images'
+    AND auth.role() = 'authenticated'
+  );
+
+-- REVIEW IMAGES BUCKET
+CREATE POLICY "Public can view review images"
+  ON storage.objects FOR SELECT
+  USING (bucket_id = 'review-images');
+
+CREATE POLICY "Users can upload review images"
+  ON storage.objects FOR INSERT
+  WITH CHECK (
+    bucket_id = 'review-images'
+    AND auth.role() = 'authenticated'
+  );
+
+CREATE POLICY "Users can delete own review images"
+  ON storage.objects FOR DELETE
+  USING (
+    bucket_id = 'review-images'
+    AND auth.uid()::text = (storage.foldername(name))[1]
+  );
+
+-- AVATARS BUCKET
+CREATE POLICY "Public can view avatars"
+  ON storage.objects FOR SELECT
+  USING (bucket_id = 'avatars');
+
+CREATE POLICY "Users can upload own avatar"
+  ON storage.objects FOR INSERT
+  WITH CHECK (
+    bucket_id = 'avatars'
+    AND auth.uid()::text = (storage.foldername(name))[1]
+  );
+
+CREATE POLICY "Users can update own avatar"
+  ON storage.objects FOR UPDATE
+  USING (
+    bucket_id = 'avatars'
+    AND auth.uid()::text = (storage.foldername(name))[1]
+  );
 
 COMMIT;
